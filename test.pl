@@ -35,7 +35,6 @@ celda_vacia(Tablero, X, Y) :-
     nth0(X, Tablero, Fila),
     nth0(Y, Fila, empty).
 
-
 % Verificar si una celda está ocupada por el jugador
 celda_ocupada(Tablero, Jugador, X, Y) :-
     nth0(X, Tablero, Fila),
@@ -132,7 +131,6 @@ jugar :-
     write('Comienza el juego. Jugador black empieza.'), nl,
     turno_juego(Tablero, black).
 
-% Manejo de turnos
 turno_juego(Tablero, Jugador) :-
     (   movimientos_disponibles(Tablero, Jugador) ->
         write('Turno de: '), write(Jugador), nl,
@@ -150,40 +148,51 @@ turno_juego(Tablero, Jugador) :-
         )
     ).
 
+movimientos_disponibles(Tablero, Jugador) :-
+    between(0, 7, X),
+    between(0, 7, Y),
+    movimiento_valido(Tablero, Jugador, X, Y), !.
+
 % Solicitar movimiento
-solicitar_movimiento(Tablero, Jugador, X, Y) :-
-    findall((X1, Y1), movimiento_valido(Tablero, Jugador, X1, Y1), Movimientos),
-    (   Movimientos \= [] ->
-        write('Movimientos válidos para '), write(Jugador), write(': '), write(Movimientos), nl,
-        write('Introduce las coordenadas (X e Y como números entre 0 y 7): '), nl,
-        read(X),
-        read(Y),
-        (   integer(X), integer(Y), member((X, Y), Movimientos) ->
-            true
-        ;   write('Movimiento inválido. Intenta de nuevo.'), nl,
-            solicitar_movimiento(Tablero, Jugador, X, Y)
-        )
-    ;   write('No hay movimientos válidos disponibles. Pasando turno.'), nl,
-        fail
-    ).
+
+% Verificar si una celda permite capturar piezas en alguna dirección
 captura(Tablero, Jugador, X, Y) :-
     direcciones(Direcciones),
     member((DX, DY), Direcciones),
     busca_captura(Tablero, Jugador, X, Y, DX, DY).
 
+    % Buscar una secuencia de piezas del oponente seguida por una del jugador
 busca_captura(Tablero, Jugador, X, Y, DX, DY) :-
     X1 is X + DX,
     Y1 is Y + DY,
     dentro_del_tablero(X1, Y1),
     pieza_oponente(Tablero, Jugador, X1, Y1),
     busca_extremo(Tablero, Jugador, X1, Y1, DX, DY).
+    
+solicitar_movimiento(Tablero, Jugador, X, Y) :-
+    findall((X1, Y1), (between(0, 7, X1), between(0, 7, Y1), movimiento_valido(Tablero, Jugador, X1, Y1)), Movimientos),
+    (   Movimientos \= [] ->  % Verifica si hay movimientos válidos
+        write('Movimientos válidos para '), write(Jugador), write(': '), write(Movimientos), nl,
+        write('Introduce las coordenadas (X e Y como números entre 0 y 7): '), nl,
+        read(X),  % Lee la coordenada X ingresada por el jugador
+        read(Y),  % Lee la coordenada Y ingresada por el jugador
+        (   integer(X), integer(Y), member((X, Y), Movimientos) ->  % Valida si (X, Y) es un movimiento válido
+            true
+        ;   write('Movimiento inválido. Intenta de nuevo.'), nl,
+            solicitar_movimiento(Tablero, Jugador, X, Y)  % Pide nuevamente la entrada si es inválida
+        )
+    ;   write('No hay movimientos válidos disponibles. Pasando turno.'), nl,
+        fail  % Falla si no hay movimientos válidos
+    ).
 
+% Verificar si el oponente ocupa una celda
 pieza_oponente(Tablero, Jugador, X, Y) :-
     dentro_del_tablero(X, Y),
     oponente(Jugador, Oponente),
     nth0(X, Tablero, Fila),
     nth0(Y, Fila, Oponente).
 
+% Verificar si hay una pieza del jugador al final de una secuencia válida
 busca_extremo(Tablero, Jugador, X, Y, DX, DY) :-
     X1 is X + DX,
     Y1 is Y + DY,
@@ -194,7 +203,3 @@ busca_extremo(Tablero, Jugador, X, Y, DX, DY) :-
         busca_extremo(Tablero, Jugador, X1, Y1, DX, DY)
     ).
 
-movimientos_disponibles(Tablero, Jugador) :-
-    between(0, 7, X),
-    between(0, 7, Y),
-    movimiento_valido(Tablero, Jugador, X, Y), !.
