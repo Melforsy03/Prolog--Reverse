@@ -30,15 +30,21 @@ oponente(black, white).
 oponente(white, black).
 
 solicitar_movimiento(Tablero, Jugador, X, Y) :-
+    repeat,
     write('Introduce las coordenadas (X e Y como números entre 0 y 7): '), nl,
-    read(X),  % coordenada X ingresada por el jugador
-    read(Y),  % coordenada Y ingresada por el jugador
+    read_line_to_string(user_input, InputX),
+    number_string(X, InputX),
+    read_line_to_string(user_input, InputY),
+    number_string(Y, InputY),
     (   
         movimiento_valido(Tablero, X, Y) ->  % Valida si (X, Y) es un movimiento válido
-        true
+            !
+        ;   
+            write(''), nl,
+            fail
     ;   
         write('Movimiento inválido. Intenta de nuevo.'), nl,
-        solicitar_movimiento(Tablero, Jugador, X, Y)  % Pide nuevamente la entrada si es inválida
+        fail
     ).
 
 quedan_movimientos(Tablero) :-
@@ -47,7 +53,6 @@ quedan_movimientos(Tablero) :-
     
 fin_juego(Tablero):-
     write('Fin del juego. Calculando puntuación...'), nl,
-    imprimir_tablero(Tablero),
 
     contar_piezas(Tablero, black, PuntuacionBlack),
     contar_piezas(Tablero, white, PuntuacionWhite),
