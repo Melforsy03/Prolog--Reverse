@@ -1,5 +1,6 @@
 :- ensure_loaded('tablero.pl').
 :- ensure_loaded('func_aux.pl').
+:- ensure_loaded('jugador.pl').
 
 
 % Juego principal
@@ -25,9 +26,6 @@ turno_juego(Tablero, Jugador) :-
         fin_juego(Tablero)
     ).
 
-% Cambiar turno
-oponente(black, white).
-oponente(white, black).
 
 solicitar_movimiento(Tablero, Jugador, X, Y) :-
     repeat,

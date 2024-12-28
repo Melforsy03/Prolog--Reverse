@@ -18,8 +18,6 @@ imprimir_tablero([Fila|Resto]) :-
     write(Fila), nl,
     imprimir_tablero(Resto).
 
-direcciones([(1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (-1, -1), (-1, 1), (1, -1)]).
-
 % Actualizaciones del tablero (nuevas piezas y capturas).
 
 actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero) :-
@@ -56,21 +54,6 @@ actualiza_en_una_direccion(Tablero, Jugador, X, Y, DX, DY, NuevoTablero) :-
         NuevoTablero = Tablero
     ).
 
-% Verificar si el oponente ocupa la celda
-pieza_oponente(Tablero, Jugador, X, Y) :-
-    dentro_del_tablero(X, Y),
-    oponente(Jugador, Oponente),
-    nth0(X, Tablero, Fila),
-    nth0(Y, Fila, Oponente).
-
-capturar(Tablero, Jugador, X, Y, DX, DY, NuevoTablero) :-
-    X1 is X + DX,
-    Y1 is Y + DY,
-    dentro_del_tablero(X1, Y1),
-    pieza_oponente(Tablero, Jugador, X1, Y1),
-    actualiza_celda(Tablero, X1, Y1, Jugador, TableroParcial),
-    capturar(TableroParcial, Jugador, X1, Y1, DX, DY, NuevoTablero).
-capturar(Tablero, _, _, _, _, _, Tablero).
 
 
 
