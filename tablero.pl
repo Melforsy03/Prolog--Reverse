@@ -53,7 +53,3 @@ actualiza_en_una_direccion(Tablero, Jugador, X, Y, DX, DY, NuevoTablero) :-
     ;   
         NuevoTablero = Tablero
     ).
-
-
-
-

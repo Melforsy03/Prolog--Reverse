@@ -3,9 +3,9 @@ direcciones([(1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (-1, -1), (-1, 1), (1, -1
 % Verificar movimiento válido
 
 es_movimiento_valido(Tablero, Jugador, (X, Y)) :-
-    movimiento_valido(Tablero, X, Y).
-    direcciones(Direcciones)
-    captura(Tablero, Jugador, X, Y, Direcciones, NuevoTablero).
+    movimiento_valido(Tablero, X, Y),
+    direcciones(Direcciones),
+    captura(Tablero, Jugador, X, Y, Direcciones).
 
 movimiento_valido(Tablero, X, Y) :-
     dentro_del_tablero(X, Y),
@@ -28,10 +28,15 @@ pieza_oponente(Tablero, Jugador, X, Y) :-
     nth0(X, Tablero, Fila),
     nth0(Y, Fila, Oponente).
 
-captura(Tablero, Jugador, X, Y,[], NuevoTablero).
-captura(Tablero, Jugador, X, Y,[(DX, DY)|Resto], NuevoTablero):-
-    capturar(Tablero, Jugador, X, Y, DX, DY, NuevoTablero),
-    captura(Tablero, Jugador, X, Y, Resto, NuevoTablero).
+captura(_, _, _,_, []).
+captura(Tablero, Jugador, X, Y,[(DX, DY)|Resto]):-
+    (
+        capturar(Tablero, Jugador, X, Y, DX, DY, _) ->
+        true
+        ;
+        captura(Tablero, Jugador, X, Y, Resto)
+    ).
+   
 
 capturar(Tablero, Jugador, X, Y, DX, DY, NuevoTablero) :-
     X1 is X + DX,
