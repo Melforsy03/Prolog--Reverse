@@ -1,0 +1,756 @@
+[gd_scene load_steps=4 format=3 uid="uid://dqx2fuhfv5wkg"]
+
+[ext_resource type="Texture2D" uid="uid://cr1qv1apm1dns" path="res://images/blank.png" id="1_in1qe"]
+[ext_resource type="Texture2D" uid="uid://dk18rumpx78li" path="res://images/background.png" id="1_m12b3"]
+[ext_resource type="Script" path="res://scenes/Board.cs" id="2_kvk04"]
+
+[node name="main" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(735.5, 396)
+scale = Vector2(3.394, 1.8)
+texture = ExtResource("1_m12b3")
+
+[node name="menu" type="Node2D" parent="."]
+visible = false
+
+[node name="Button" type="Button" parent="menu"]
+offset_left = 573.0
+offset_top = 326.0
+offset_right = 835.0
+offset_bottom = 402.0
+text = "Start"
+
+[node name="board" type="Node2D" parent="."]
+position = Vector2(200, 20)
+scale = Vector2(0.7, 0.7)
+script = ExtResource("2_kvk04")
+
+[node name="b0" type="Button" parent="board"]
+offset_left = 200.0
+offset_top = 10.0
+offset_right = 325.0
+offset_bottom = 135.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b1" type="Button" parent="board"]
+offset_left = 325.0
+offset_top = 10.0
+offset_right = 450.0
+offset_bottom = 135.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b2" type="Button" parent="board"]
+offset_left = 450.0
+offset_top = 10.0
+offset_right = 575.0
+offset_bottom = 135.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b3" type="Button" parent="board"]
+offset_left = 575.0
+offset_top = 10.0
+offset_right = 700.0
+offset_bottom = 135.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b4" type="Button" parent="board"]
+offset_left = 700.0
+offset_top = 10.0
+offset_right = 825.0
+offset_bottom = 135.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b5" type="Button" parent="board"]
+offset_left = 825.0
+offset_top = 10.0
+offset_right = 950.0
+offset_bottom = 135.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b6" type="Button" parent="board"]
+offset_left = 950.0
+offset_top = 10.0
+offset_right = 1075.0
+offset_bottom = 135.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b7" type="Button" parent="board"]
+offset_left = 1075.0
+offset_top = 10.0
+offset_right = 1200.0
+offset_bottom = 135.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b8" type="Button" parent="board"]
+offset_left = 200.0
+offset_top = 135.0
+offset_right = 325.0
+offset_bottom = 260.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b9" type="Button" parent="board"]
+offset_left = 325.0
+offset_top = 135.0
+offset_right = 450.0
+offset_bottom = 260.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b10" type="Button" parent="board"]
+offset_left = 450.0
+offset_top = 135.0
+offset_right = 575.0
+offset_bottom = 260.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b11" type="Button" parent="board"]
+offset_left = 575.0
+offset_top = 135.0
+offset_right = 700.0
+offset_bottom = 260.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b12" type="Button" parent="board"]
+offset_left = 700.0
+offset_top = 135.0
+offset_right = 825.0
+offset_bottom = 260.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b13" type="Button" parent="board"]
+offset_left = 825.0
+offset_top = 135.0
+offset_right = 950.0
+offset_bottom = 260.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b14" type="Button" parent="board"]
+offset_left = 950.0
+offset_top = 135.0
+offset_right = 1075.0
+offset_bottom = 260.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b15" type="Button" parent="board"]
+offset_left = 1075.0
+offset_top = 135.0
+offset_right = 1200.0
+offset_bottom = 260.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b16" type="Button" parent="board"]
+offset_left = 200.0
+offset_top = 260.0
+offset_right = 325.0
+offset_bottom = 385.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b17" type="Button" parent="board"]
+offset_left = 325.0
+offset_top = 260.0
+offset_right = 450.0
+offset_bottom = 385.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b18" type="Button" parent="board"]
+offset_left = 450.0
+offset_top = 260.0
+offset_right = 575.0
+offset_bottom = 385.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b19" type="Button" parent="board"]
+offset_left = 575.0
+offset_top = 260.0
+offset_right = 700.0
+offset_bottom = 385.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b20" type="Button" parent="board"]
+offset_left = 700.0
+offset_top = 260.0
+offset_right = 825.0
+offset_bottom = 385.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b21" type="Button" parent="board"]
+offset_left = 825.0
+offset_top = 260.0
+offset_right = 950.0
+offset_bottom = 385.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b22" type="Button" parent="board"]
+offset_left = 950.0
+offset_top = 260.0
+offset_right = 1075.0
+offset_bottom = 385.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b23" type="Button" parent="board"]
+offset_left = 1075.0
+offset_top = 260.0
+offset_right = 1200.0
+offset_bottom = 385.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b24" type="Button" parent="board"]
+offset_left = 200.0
+offset_top = 385.0
+offset_right = 325.0
+offset_bottom = 510.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b25" type="Button" parent="board"]
+offset_left = 325.0
+offset_top = 385.0
+offset_right = 450.0
+offset_bottom = 510.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b26" type="Button" parent="board"]
+offset_left = 450.0
+offset_top = 385.0
+offset_right = 575.0
+offset_bottom = 510.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b27" type="Button" parent="board"]
+offset_left = 575.0
+offset_top = 385.0
+offset_right = 700.0
+offset_bottom = 510.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b28" type="Button" parent="board"]
+offset_left = 700.0
+offset_top = 385.0
+offset_right = 825.0
+offset_bottom = 510.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b29" type="Button" parent="board"]
+offset_left = 825.0
+offset_top = 385.0
+offset_right = 950.0
+offset_bottom = 510.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b30" type="Button" parent="board"]
+offset_left = 950.0
+offset_top = 385.0
+offset_right = 1075.0
+offset_bottom = 510.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b31" type="Button" parent="board"]
+offset_left = 1075.0
+offset_top = 385.0
+offset_right = 1200.0
+offset_bottom = 510.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b32" type="Button" parent="board"]
+offset_left = 200.0
+offset_top = 510.0
+offset_right = 325.0
+offset_bottom = 635.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b33" type="Button" parent="board"]
+offset_left = 325.0
+offset_top = 510.0
+offset_right = 450.0
+offset_bottom = 635.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b34" type="Button" parent="board"]
+offset_left = 450.0
+offset_top = 510.0
+offset_right = 575.0
+offset_bottom = 635.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b35" type="Button" parent="board"]
+offset_left = 575.0
+offset_top = 510.0
+offset_right = 700.0
+offset_bottom = 635.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b36" type="Button" parent="board"]
+offset_left = 700.0
+offset_top = 510.0
+offset_right = 825.0
+offset_bottom = 635.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b37" type="Button" parent="board"]
+offset_left = 825.0
+offset_top = 510.0
+offset_right = 950.0
+offset_bottom = 635.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b38" type="Button" parent="board"]
+offset_left = 950.0
+offset_top = 510.0
+offset_right = 1075.0
+offset_bottom = 635.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b39" type="Button" parent="board"]
+offset_left = 1075.0
+offset_top = 510.0
+offset_right = 1200.0
+offset_bottom = 635.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b40" type="Button" parent="board"]
+offset_left = 200.0
+offset_top = 635.0
+offset_right = 325.0
+offset_bottom = 760.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b41" type="Button" parent="board"]
+offset_left = 325.0
+offset_top = 635.0
+offset_right = 450.0
+offset_bottom = 760.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b42" type="Button" parent="board"]
+offset_left = 450.0
+offset_top = 635.0
+offset_right = 575.0
+offset_bottom = 760.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b43" type="Button" parent="board"]
+offset_left = 575.0
+offset_top = 635.0
+offset_right = 700.0
+offset_bottom = 760.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b44" type="Button" parent="board"]
+offset_left = 700.0
+offset_top = 635.0
+offset_right = 825.0
+offset_bottom = 760.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b45" type="Button" parent="board"]
+offset_left = 825.0
+offset_top = 635.0
+offset_right = 950.0
+offset_bottom = 760.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b46" type="Button" parent="board"]
+offset_left = 950.0
+offset_top = 635.0
+offset_right = 1075.0
+offset_bottom = 760.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b47" type="Button" parent="board"]
+offset_left = 1075.0
+offset_top = 635.0
+offset_right = 1200.0
+offset_bottom = 760.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b48" type="Button" parent="board"]
+offset_left = 200.0
+offset_top = 760.0
+offset_right = 325.0
+offset_bottom = 885.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b49" type="Button" parent="board"]
+offset_left = 325.0
+offset_top = 760.0
+offset_right = 450.0
+offset_bottom = 885.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b50" type="Button" parent="board"]
+offset_left = 450.0
+offset_top = 760.0
+offset_right = 575.0
+offset_bottom = 885.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b51" type="Button" parent="board"]
+offset_left = 575.0
+offset_top = 760.0
+offset_right = 700.0
+offset_bottom = 885.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b52" type="Button" parent="board"]
+offset_left = 700.0
+offset_top = 760.0
+offset_right = 825.0
+offset_bottom = 885.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b53" type="Button" parent="board"]
+offset_left = 825.0
+offset_top = 760.0
+offset_right = 950.0
+offset_bottom = 885.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b54" type="Button" parent="board"]
+offset_left = 950.0
+offset_top = 760.0
+offset_right = 1075.0
+offset_bottom = 885.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b55" type="Button" parent="board"]
+offset_left = 1075.0
+offset_top = 760.0
+offset_right = 1200.0
+offset_bottom = 885.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b56" type="Button" parent="board"]
+offset_left = 200.0
+offset_top = 885.0
+offset_right = 325.0
+offset_bottom = 1010.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b57" type="Button" parent="board"]
+offset_left = 325.0
+offset_top = 885.0
+offset_right = 450.0
+offset_bottom = 1010.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b58" type="Button" parent="board"]
+offset_left = 450.0
+offset_top = 885.0
+offset_right = 575.0
+offset_bottom = 1010.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b59" type="Button" parent="board"]
+offset_left = 575.0
+offset_top = 885.0
+offset_right = 700.0
+offset_bottom = 1010.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b60" type="Button" parent="board"]
+offset_left = 700.0
+offset_top = 885.0
+offset_right = 825.0
+offset_bottom = 1010.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b61" type="Button" parent="board"]
+offset_left = 825.0
+offset_top = 885.0
+offset_right = 950.0
+offset_bottom = 1010.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b62" type="Button" parent="board"]
+offset_left = 950.0
+offset_top = 885.0
+offset_right = 1075.0
+offset_bottom = 1010.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="b63" type="Button" parent="board"]
+offset_left = 1075.0
+offset_top = 885.0
+offset_right = 1200.0
+offset_bottom = 1010.0
+action_mode = 0
+icon = ExtResource("1_in1qe")
+flat = true
+expand_icon = true
+
+[node name="player1" type="TextEdit" parent="board"]
+offset_left = 40.0
+offset_top = 22.8571
+offset_right = 131.0
+offset_bottom = 77.8571
+theme_override_colors/background_color = Color(0.262745, 0, 0.890196, 1)
+text = "Player2"
+
+[node name="playerTurn" type="TextEdit" parent="board"]
+offset_left = 1312.86
+offset_top = 465.714
+offset_right = 1437.86
+offset_bottom = 520.714
+theme_override_colors/background_color = Color(0.262745, 0, 0.890196, 1)
+text = "Player2 Turn"
+
+[node name="player2" type="TextEdit" parent="board"]
+offset_left = 48.5714
+offset_top = 930.0
+offset_right = 139.571
+offset_bottom = 985.0
+theme_override_colors/background_color = Color(0.560861, 0.0043116, 1.92523e-07, 1)
+text = "Player1"
+
+[connection signal="pressed" from="board/b0" to="board" method="_on_b_0_pressed"]
+[connection signal="pressed" from="board/b1" to="board" method="_on_b_1_pressed"]
+[connection signal="pressed" from="board/b2" to="board" method="_on_b_2_pressed"]
+[connection signal="pressed" from="board/b3" to="board" method="_on_b_3_pressed"]
+[connection signal="pressed" from="board/b4" to="board" method="_on_b_4_pressed"]
+[connection signal="pressed" from="board/b5" to="board" method="_on_b_5_pressed"]
+[connection signal="pressed" from="board/b6" to="board" method="_on_b_6_pressed"]
+[connection signal="pressed" from="board/b7" to="board" method="_on_b_7_pressed"]
+[connection signal="pressed" from="board/b8" to="board" method="_on_b_8_pressed"]
+[connection signal="pressed" from="board/b9" to="board" method="_on_b_9_pressed"]
+[connection signal="pressed" from="board/b10" to="board" method="_on_b_10_pressed"]
+[connection signal="pressed" from="board/b11" to="board" method="_on_b_11_pressed"]
+[connection signal="pressed" from="board/b12" to="board" method="_on_b_12_pressed"]
+[connection signal="pressed" from="board/b13" to="board" method="_on_b_13_pressed"]
+[connection signal="pressed" from="board/b14" to="board" method="_on_b_14_pressed"]
+[connection signal="pressed" from="board/b15" to="board" method="_on_b_15_pressed"]
+[connection signal="pressed" from="board/b16" to="board" method="_on_b_16_pressed"]
+[connection signal="pressed" from="board/b17" to="board" method="_on_b_17_pressed"]
+[connection signal="pressed" from="board/b18" to="board" method="_on_b_18_pressed"]
+[connection signal="pressed" from="board/b19" to="board" method="_on_b_19_pressed"]
+[connection signal="pressed" from="board/b20" to="board" method="_on_b_20_pressed"]
+[connection signal="pressed" from="board/b21" to="board" method="_on_b_21_pressed"]
+[connection signal="pressed" from="board/b22" to="board" method="_on_b_22_pressed"]
+[connection signal="pressed" from="board/b23" to="board" method="_on_b_23_pressed"]
+[connection signal="pressed" from="board/b24" to="board" method="_on_b_24_pressed"]
+[connection signal="pressed" from="board/b25" to="board" method="_on_b_25_pressed"]
+[connection signal="pressed" from="board/b26" to="board" method="_on_b_26_pressed"]
+[connection signal="pressed" from="board/b27" to="board" method="_on_b_27_pressed"]
+[connection signal="pressed" from="board/b28" to="board" method="_on_b_28_pressed"]
+[connection signal="pressed" from="board/b29" to="board" method="_on_b_29_pressed"]
+[connection signal="pressed" from="board/b30" to="board" method="_on_b_30_pressed"]
+[connection signal="pressed" from="board/b31" to="board" method="_on_b_31_pressed"]
+[connection signal="pressed" from="board/b32" to="board" method="_on_b_32_pressed"]
+[connection signal="pressed" from="board/b33" to="board" method="_on_b_33_pressed"]
+[connection signal="pressed" from="board/b34" to="board" method="_on_b_34_pressed"]
+[connection signal="pressed" from="board/b35" to="board" method="_on_b_35_pressed"]
+[connection signal="pressed" from="board/b36" to="board" method="_on_b_36_pressed"]
+[connection signal="pressed" from="board/b37" to="board" method="_on_b_37_pressed"]
+[connection signal="pressed" from="board/b38" to="board" method="_on_b_38_pressed"]
+[connection signal="pressed" from="board/b39" to="board" method="_on_b_39_pressed"]
+[connection signal="pressed" from="board/b40" to="board" method="_on_b_40_pressed"]
+[connection signal="pressed" from="board/b41" to="board" method="_on_b_41_pressed"]
+[connection signal="pressed" from="board/b42" to="board" method="_on_b_42_pressed"]
+[connection signal="pressed" from="board/b43" to="board" method="_on_b_43_pressed"]
+[connection signal="pressed" from="board/b44" to="board" method="_on_b_44_pressed"]
+[connection signal="pressed" from="board/b45" to="board" method="_on_b_45_pressed"]
+[connection signal="pressed" from="board/b46" to="board" method="_on_b_46_pressed"]
+[connection signal="pressed" from="board/b47" to="board" method="_on_b_47_pressed"]
+[connection signal="pressed" from="board/b48" to="board" method="_on_b_48_pressed"]
+[connection signal="pressed" from="board/b49" to="board" method="_on_b_49_pressed"]
+[connection signal="pressed" from="board/b50" to="board" method="_on_b_50_pressed"]
+[connection signal="pressed" from="board/b51" to="board" method="_on_b_51_pressed"]
+[connection signal="pressed" from="board/b52" to="board" method="_on_b_52_pressed"]
+[connection signal="pressed" from="board/b53" to="board" method="_on_b_53_pressed"]
+[connection signal="pressed" from="board/b54" to="board" method="_on_b_54_pressed"]
+[connection signal="pressed" from="board/b55" to="board" method="_on_b_55_pressed"]
+[connection signal="pressed" from="board/b56" to="board" method="_on_b_56_pressed"]
+[connection signal="pressed" from="board/b57" to="board" method="_on_b_57_pressed"]
+[connection signal="pressed" from="board/b58" to="board" method="_on_b_58_pressed"]
+[connection signal="pressed" from="board/b59" to="board" method="_on_b_59_pressed"]
+[connection signal="pressed" from="board/b60" to="board" method="_on_b_60_pressed"]
+[connection signal="pressed" from="board/b61" to="board" method="_on_b_61_pressed"]
+[connection signal="pressed" from="board/b62" to="board" method="_on_b_62_pressed"]
+[connection signal="pressed" from="board/b63" to="board" method="_on_b_63_pressed"]
