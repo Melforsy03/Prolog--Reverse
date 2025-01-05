@@ -30,7 +30,7 @@ jugar_con_virtual :-
 turno_juego(Tablero, Jugador) :-
     (   
         write('Turno de: '), write(Jugador), nl,
-        solicitar_movimiento(Tablero, Jugador, X, Y),
+        solicitar_movimiento(Tablero, X, Y),
         actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
         imprimir_tablero(NuevoTablero),
 
@@ -46,7 +46,7 @@ turno_juego(Tablero, Jugador) :-
 turno_juego_virtual(Tablero, Jugador) :-
     (   write('Turno de: '), write(Jugador), nl,
         (   Jugador == black ->
-            solicitar_movimiento(Tablero, Jugador, X, Y)
+            solicitar_movimiento(Tablero, X, Y)
         ;   jugador_virtual(Tablero, Jugador, (X, Y)),
             write('El jugador virtual elige: ('), write(X), write(', '), write(Y), write(')'), nl
         ),
@@ -59,7 +59,7 @@ turno_juego_virtual(Tablero, Jugador) :-
         fin_juego(Tablero)
     ).
 
-solicitar_movimiento(Tablero, Jugador, X, Y) :-
+solicitar_movimiento(Tablero, X, Y) :-
     repeat,
     write('Introduce las coordenadas (X e Y como números entre 0 y 7): '), nl,
     read_line_to_string(user_input, InputX),

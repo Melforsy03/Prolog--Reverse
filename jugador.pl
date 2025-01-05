@@ -21,7 +21,7 @@ random_member(Lista, Elemento) :-
 
 jugador_heuristico(Tablero, Jugador, MovimientoSeleccionado) :-
     movimientos_validos(Tablero, Jugador, Movimientos),
-    maplist(evaluar_movimiento(Tablero,Jugador), Movimientos, Valores),
+    maplist(evaluar_movimiento(Tablero, _, Jugador), Movimientos, Valores),
     max_member(ValorMax, Valores),
     nth0(Indice, Valores, ValorMax),
     nth0(Indice, Movimientos, MovimientoSeleccionado).
