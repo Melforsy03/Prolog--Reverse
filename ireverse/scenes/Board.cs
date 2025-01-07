@@ -1,12 +1,16 @@
 using Godot;
 using System;
 using System.IO;
+using System.IO.Pipes;
 public partial class Board : Node2D
 {
 	private static int PlayerTurn = 1;
 	private static bool AnswerReady = true;
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	private static StreamWriter swIn = new StreamWriter("../ireverse/in.txt");
+	private static StreamReader srOut;
+	private static StreamWriter swOut;
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
 	{
 	}
 
@@ -14,13 +18,11 @@ public partial class Board : Node2D
 	public override void _Process(double delta)
 	{
 		if(!AnswerReady){
-			
-			StreamReader sr = new StreamReader("out.txt");
-			StreamWriter sw = new StreamWriter("out.txt");
-			
-			string line = sr.ReadLine();
+			srOut = new StreamReader("../ireverse/out.txt");
+			string line = srOut.ReadLine();
+			srOut.Close();
+			GD.Print(line);
 			string matrixLine = string.Empty;
-			
 			bool firstReaded = false;
 			
 			foreach(char a in line){
@@ -36,47 +38,59 @@ public partial class Board : Node2D
 					matrixLine += a;
 				}
 			}
-			firstReaded = false;
-			File.WriteAllText("out.txt", string.Empty);
-			sw.WriteLine("0");
-			int c = 0;
-			foreach(char a in matrixLine){
+			if (firstReaded)
+			{
+                int c = 0;
+                foreach (char a in matrixLine)
+                {
 
-				Image image = new Image();
-				string p = a.ToString();
-				if(int.Parse(p) == 0){
-					image.Load(@"../ireverse/images/blank.png");
-				}else if(int.Parse(p) == 1){
-					image.Load(@"../ireverse/images/red.png");
-				}else if(int.Parse(p) == 2){
-					image.Load(@"../ireverse/images/blue.png");
+                    Image image = new Image();
+                    string p = a.ToString();
+                    if (int.Parse(p) == 0)
+                    {
+                        image.Load(@"../ireverse/images/blank.png");
+                    }
+                    else if (int.Parse(p) == 1)
+                    {
+                        image.Load(@"../ireverse/images/red.png");
+                    }
+                    else if (int.Parse(p) == 2)
+                    {
+                        image.Load(@"../ireverse/images/blue.png");
+                    }
+                    ImageTexture Photo = ImageTexture.CreateFromImage(image);
+                    GetNode<Button>("b" + c).SetButtonIcon(Photo);
+                    c++;
+                }
+				if (PlayerTurn == 1)
+				{
+					PlayerTurn = 2;
 				}
-				ImageTexture Photo = ImageTexture.CreateFromImage(image);
-				GetNode<Button>("b"+c).SetButtonIcon(Photo);
-				c++;
-			}
-			if(PlayerTurn == 1){
-				PlayerTurn = 2;
-			}else{
-				PlayerTurn = 1;
-			}
-
-			AnswerReady = true;
+				else
+				{
+					PlayerTurn = 1;
+				}
+				swOut = new StreamWriter("../ireverse/out.txt");
+				swOut.WriteLine(0);
+				swOut.Close();
+                AnswerReady = true;
+            }
+			
 		}
 	}
 	
 	public void ButtonManager(int i)
-	{
+    {
 		if(AnswerReady){
-			StreamWriter sw = new StreamWriter("in.txt");
-			sw.WriteLine("1"+ PlayerTurn + GetX(i) + GetY(i));
-			AnswerReady = false;
+            swIn.WriteLine("1" + PlayerTurn + GetX(i) + GetY(i));
+			swIn.Close();
+            AnswerReady = false;
 		}	
 	}
 	
 	private int GetX(int x){
 		while(x > 7){
-			x = x-8;
+			x =-8;
 		}
 		return x;
 	}
@@ -87,7 +101,7 @@ public partial class Board : Node2D
 
 
 	private void _on_b_0_pressed(){
-		ButtonManager(0);
+        ButtonManager(0);
 	}
 	private void _on_b_1_pressed(){
 		ButtonManager(1);
