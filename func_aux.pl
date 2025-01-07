@@ -3,8 +3,8 @@ direcciones([(1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (-1, -1), (-1, 1), (1, -1
 % Verificar movimiento válido
 
 es_movimiento_valido(Tablero, Jugador, (X, Y)) :-
-    movimiento_valido(Tablero, X, Y).
-    direcciones(Direcciones)
+    movimiento_valido(Tablero, X, Y),
+    direcciones(Direcciones),
     captura(Tablero, Jugador, X, Y, Direcciones, NuevoTablero).
 
 movimiento_valido(Tablero, X, Y) :-
