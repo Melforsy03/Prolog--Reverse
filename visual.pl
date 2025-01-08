@@ -1,5 +1,5 @@
 leer_start(Opcion, Dificultad):- 
-    open('start.txt', read, StreamIn),          
+    open('ireverse/start.txt', read, StreamIn),         
     read_line_to_string(StreamIn, Line),      
     close(StreamIn),
 
@@ -10,12 +10,12 @@ leer_start(Opcion, Dificultad):-
     number_string(Opcion, Opcion_txt),                  
     number_string(Dificultad, Dificultad_txt),
 
-    open('start.txt', write, StreamOut),        
+    open('ireverse/start.txt', read, StreamIn),       
     write(StreamOut, '0'),                    
     close(StreamOut).  
 
 leer_in(Jugador, X, Y) :-
-    open('in.txt', read, StreamIn),          
+    open('ireverse/in.txt', read, StreamIn),         
     read_line_to_string(StreamIn, Line),      
     close(StreamIn),     
 
@@ -28,12 +28,12 @@ leer_in(Jugador, X, Y) :-
     number_string(X, X_txt),                  
     number_string(Y, Y_txt),   
                    
-    open('in.txt', write, StreamOut),        
+    open('ireverse/in.txt', read, StreamIn),       
     write(StreamOut, '0'),                    
     close(StreamOut).            
 
 escribir_out(Matriz, Error) :-
-    open('out.txt', write, Stream),
+    open('ireverse/out.txt', read, StreamIn),
     write(Stream, '1 '),  % Comienza con un 1 para indicar que es una respuesta válida
     write(Stream, Error),
     escribir_matriz(Stream, Matriz),
@@ -58,7 +58,7 @@ convertir(H, X) :-
     ).
 
 escribir_end(Jugador, Puntuacion) :-
-    open('end.txt', write, Stream),
+    open('ireverse/end.txt', read, StreamIn),
     write(Stream, '1 '),  % Comienza con un 1 para indicar que es una respuesta válida
     write(Stream, Jugador),
     write(Stream, Puntuacion),
