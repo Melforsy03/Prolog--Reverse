@@ -8,11 +8,7 @@ leer_start(Opcion, Dificultad):-
     sub_string(Line, 2, 1, _, Dificultad_txt),  
        
     number_string(Opcion, Opcion_txt),                  
-    number_string(Dificultad, Dificultad_txt),
-
-    open('ireverse/start.txt', read, StreamIn),       
-    write(StreamOut, '0'),                    
-    close(StreamOut).  
+    number_string(Dificultad, Dificultad_txt).
 
 leer_in(Jugador, X, Y) :-
     open('ireverse/in.txt', read, StreamIn),         
@@ -66,3 +62,26 @@ escribir_end(Jugador, Puntuacion) :-
     close(Stream).
 
         
+poner_cero(Tipo) :-
+( 
+    Tipo == 1 -> 
+    open('ireverse/start.txt', write, StreamOut),       
+    write(StreamOut, '0'),                    
+    close(StreamOut)
+;   
+    Tipo == 2 -> 
+    open('ireverse/in.txt', write, StreamIn),       
+    write(StreamOut, '0'),                    
+    close(StreamOut)
+;   
+    Tipo == 3 -> 
+    open('ireverse/out.txt', write, StreamIn),       
+    write(StreamOut, '0'),                    
+    close(StreamOut)
+;
+    Tipo == 4 -> 
+    open('ireverse/end.txt', write, StreamIn),       
+    write(StreamOut, '0'),                    
+    close(StreamOut)
+).
+    
