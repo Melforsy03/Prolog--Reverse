@@ -25,7 +25,8 @@ inicio :-
 
 jugar(Opcion, Dificultad, Tablero) :-
     (   
-        leer_in(Jugador, X, Y),
+        leer_in(JugadorIn, X, Y),
+        asignar_color(JugadorIn, Jugador),
         poner_ceroI()
     ->  
         (   
@@ -121,4 +122,6 @@ fin_juego(Tablero):-
     poner_ceroO().
 
 
+asignar_color(Jugador, Color) :-
+    (Jugador =:= 1 -> Color = black; Color = white).
 
