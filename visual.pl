@@ -22,17 +22,14 @@ leer_in(Jugador, X, Y) :-
     
     number_string(Jugador, Jugador_txt),  
     number_string(X, X_txt),                  
-    number_string(Y, Y_txt),   
-                   
-    open('ireverse/in.txt', read, StreamIn),       
-    write(StreamOut, '0'),                    
-    close(StreamOut).            
+    number_string(Y, Y_txt).            
 
 escribir_out(Matriz, Error) :-
-    open('ireverse/out.txt', read, StreamIn),
+    transformar_tablero(Matriz, Matriz_Out),
+    open('ireverse/out.txt', write, Stream),
     write(Stream, '1 '),  % Comienza con un 1 para indicar que es una respuesta válida
     write(Stream, Error),
-    escribir_matriz(Stream, Matriz),
+    escribir_matriz(Stream, Matriz_Out),
     close(Stream).
 
 escribir_matriz(_, []) :- nl.  % Cuando se haya procesado toda la matriz, termina con un salto de línea.
@@ -41,47 +38,50 @@ escribir_matriz(Stream, [H|T]) :-
     write(Stream, X),
     escribir_matriz(Stream, T).
 
-convertir(H, X) :-
-    ( 
-        H == empty -> 
-        X is 0
-    ;   
-        H == black -> 
-        X is 1
-    ;   
-        H == white -> 
-        X is 2
-    ).
+% Predicado principal
+transformar_tablero(MatrizOriginal, MatrizTransformada) :-
+    reemplazar_valores(MatrizOriginal, MatrizTransformada).
+
+% Reemplaza valores en una lista de listas (matriz)
+reemplazar_valores([], []).
+reemplazar_valores([Fila | Resto], [FilaReemplazada | RestoReemplazado]) :-
+    reemplazar_fila(Fila, FilaReemplazada),    % Reemplaza los valores en la fila actual
+    reemplazar_valores(Resto, RestoReemplazado). % Llama recursivamente al resto de la matriz
+
+% Reemplaza valores en una fila
+reemplazar_fila([], []). 
+reemplazar_fila([empty | Resto], [0 | RestoReemplazado]) :- 
+    reemplazar_fila(Resto, RestoReemplazado). % Reemplaza empty por 0
+reemplazar_fila([black | Resto], [1 | RestoReemplazado]) :- 
+    reemplazar_fila(Resto, RestoReemplazado). % Reemplaza black por 1
+reemplazar_fila([white | Resto], [2 | RestoReemplazado]) :- 
+    reemplazar_fila(Resto, RestoReemplazado). % Reemplaza white por 2
+
 
 escribir_end(Jugador, Puntuacion) :-
-    open('ireverse/end.txt', read, StreamIn),
+    open('ireverse/end.txt', write, StreamIn),
     write(Stream, '1 '),  % Comienza con un 1 para indicar que es una respuesta válida
     write(Stream, Jugador),
     write(Stream, Puntuacion),
     escribir_matriz(Stream, Matriz),
     close(Stream).
 
-        
-poner_cero(Tipo) :-
-( 
-    Tipo == 1 -> 
+poner_ceroS() :-
     open('ireverse/start.txt', write, StreamOut),       
     write(StreamOut, '0'),                    
-    close(StreamOut)
-;   
-    Tipo == 2 -> 
-    open('ireverse/in.txt', write, StreamIn),       
+    close(StreamOut).
+
+poner_ceroI() :-
+    open('ireverse/in.txt', write, StreamOut),       
     write(StreamOut, '0'),                    
-    close(StreamOut)
-;   
-    Tipo == 3 -> 
-    open('ireverse/out.txt', write, StreamIn),       
+    close(StreamOut).
+
+poner_ceroO() :-
+    open('ireverse/out.txt', write, StreamOut),       
     write(StreamOut, '0'),                    
-    close(StreamOut)
-;
-    Tipo == 4 -> 
-    open('ireverse/end.txt', write, StreamIn),       
+    close(StreamOut).
+
+poner_ceroE() :-
+    open('ireverse/end.txt', write, StreamOut),       
     write(StreamOut, '0'),                    
-    close(StreamOut)
-).
-    
+    close(StreamOut).

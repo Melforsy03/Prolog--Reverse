@@ -11,6 +11,10 @@ inicializar_tablero([
     [empty, empty, empty, empty, empty, empty, empty, empty],
     [empty, empty, empty, empty, empty, empty, empty, empty]
 ]).
+imprimir_tablero([]).
+imprimir_tablero([Fila|Resto]) :-
+    write(Fila), nl,
+    imprimir_tablero(Resto).
 
 % Actualizaciones del tablero (nuevas piezas y capturas).
 

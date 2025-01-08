@@ -11,9 +11,11 @@ inicio :-
     (
         leer_start(Opcion, Dificultad)
     ->
-        poner_cero(1),
         write('Se leyo start, empieza el juego'), nl,
+        poner_ceroS(),
+        write('Se puso el cero'), nl,
         inicializar_tablero(Tablero),
+        imprimir_tablero(Tablero), nl,
         jugar(Opcion, Dificultad, Tablero)
     ;
         write(' No Se leyo start'), nl,
@@ -24,10 +26,10 @@ inicio :-
 jugar(Opcion, Dificultad, Tablero) :-
     (   
         leer_in(Jugador, X, Y),
-        poner_cero(2)
+        poner_ceroI()
     ->  
         (   
-            write('Se leyo in'), nl,
+            write('Se leyo in y  se puso cero'), nl,
             Opcion == 1
         ->  turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad)
         ;   
@@ -40,7 +42,7 @@ jugar(Opcion, Dificultad, Tablero) :-
     ;   
         write('No Se leyo in'), nl, 
         sleep(1),
-        inicio()
+        jugar(Opcion, Dificultad, Tablero)
     ).
 
 
@@ -51,10 +53,13 @@ turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad) :-
     ->  
         actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
         (   
-            quedan_movimientos(NuevoTablero)
+            quedan_movimientos(NuevoTablero),
+            imprimir_tablero(NuevoTablero), nl
         ->  
+            write('Se va a escribir un out'), nl,
             escribir_out(NuevoTablero, 0),
-            poner_cero(3),
+            write('Se va a escribir un cero'), nl,
+            poner_ceroO(),
             jugar(Opcion, Dificultad, NuevoTablero)
         ;   
             fin_juego(NuevoTablero)
@@ -62,7 +67,7 @@ turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad) :-
     ;   % OUT ERROR
         write('Error en el mov'), nl,
         escribir_out(NuevoTablero, 1),
-        poner_cero(3)
+        poner_ceroO()
     ).
 
 
@@ -82,8 +87,11 @@ turno_juego_virtual(Tablero, Jugador , Opcion, Dificultad) :-
 
         actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
         quedan_movimientos(NuevoTablero),
+        write('Se va a escribir en out'), nl,
         escribir_out(NuevoTablero, 0),
-        poner_cero(0),
+        write('Se va a escribir un cero'), nl,
+        poner_ceroO(),
+        write('Se un cero'), nl,
         jugar(Opcion, Dificultad, NuevoTablero)
     ;   
         % Alerta('No quedan movimientos disponibles.'), nl,
@@ -110,7 +118,7 @@ fin_juego(Tablero):-
     ;   
         escribir_end(3, PuntuacionBlack)
     ),
-    poner_cero(3).
+    poner_ceroO().
 
 
 
