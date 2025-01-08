@@ -1,102 +1,72 @@
 :- ensure_loaded('tablero.pl').
 :- ensure_loaded('func_aux.pl').
 :- ensure_loaded('jugador.pl').
+:- ensure_loaded('visual.pl').
 :- ensure_loaded('jugador_virtual.pl').
 :- ensure_loaded('jugador_facil.pl').
 :- ensure_loaded('jugador_medio.pl').
+
 % Juego principal
-jugar :-
-    write('Selecciona el modo de juego:'), nl,
-    write('1. Multijugador'), nl,
-    write('2. Contra jugador virtual'), nl,
-    read(Opcion),
-    (   Opcion == 1 -> jugar_multijugador
-    ;   Opcion == 2 -> seleccionar_dificultad
-    ;   write('Opción inválida. Intenta de nuevo.'), nl, jugar
+inicio :-
+    (
+        leer_start(Opcion, Dificultad),
+        inicializar_tablero(Tablero),
+        jugar(Opcion, Dificultad, Tablero).
+    ;
+        sleep(1),
+        inicio
     ).
 
-seleccionar_dificultad :-
-    write('Selecciona la dificultad del jugador virtual:'), nl,
-    write('1. Fácil'), nl,
-    write('2. Medio'), nl,
-    write('3. Difícil'), nl,
-    read(Dificultad),
-    (   Dificultad == 1 -> jugar_con_virtual(1)
-    ;   Dificultad == 2 -> jugar_con_virtual(2)
-    ;   Dificultad == 3 -> jugar_con_virtual(3)
-    ; write('Opción inválida. Intenta de nuevo.'), nl, seleccionar_dificultad
+jugar(Opcion, Dificultad, Tablero) :-
+    (
+        leer_in(Jugador, X, Y),
+        (   
+            Opcion == 1 -> turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad)
+        ;   
+            Opcion == 2, Jugador == 1 -> turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad)
+        ;
+            Opcion == 2, Jugador == 2 -> turno_juego_virtual(Tablero, Jugador, Opcion, Dificultad)
+        )
+    ;
+        sleep(1),
+        inicio
     ).
 
-% Modo multijugador
-jugar_multijugador :-
-    inicializar_tablero(Tablero),
-    imprimir_tablero(Tablero),
-    write('Comienza el juego. Jugador black empieza.'), nl,
-    turno_juego(Tablero, black).
-
-% Modo jugador virtual
-jugar_con_virtual(Dificultad) :-
-
-    inicializar_tablero(Tablero),
-    imprimir_tablero(Tablero),
-    write('Comienza el juego contra el jugador virtual. Jugador black empieza.'), nl,
-    turno_juego_virtual(Tablero, black , Dificultad).
 % Manejo de turnos
-turno_juego(Tablero, Jugador) :-
+turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad) :-
     (   
-        write('Turno de: '), write(Jugador), nl,
-        solicitar_movimiento(Tablero, X, Y),
+        movimiento_valido(Tablero, X, Y),
         actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
-        imprimir_tablero(NuevoTablero),
-
-        oponente(Jugador, OtroJugador),
         quedan_movimientos(NuevoTablero),
-        turno_juego(NuevoTablero, OtroJugador)
+        escribir_out(NuevoTablero),
+        jugar(Opcion, Dificultad, NuevoTablero),
+       
     ;   
-        write('No quedan movimientos disponibles.'), nl,
+        % Alerta ('No quedan movimientos disponibles.'), nl,
         fin_juego(Tablero)
     ).
 
 % Manejo de turnos contra jugador virtual
-turno_juego_virtual(Tablero, Jugador , Dificultad) :-
-    (   write('Turno de: '), write(Jugador), nl,
-        (   Jugador == black ->
-            solicitar_movimiento(Tablero, X, Y)
-        ;   Dificultad == 1 -> 
+turno_juego_virtual(Tablero, Jugador , Opcion, Dificultad) :-
+    (  
+        ( 
+            Dificultad == 1 -> 
             jugador_facil(Tablero, Jugador , (X, Y)),
-            write('El jugador virtual elige: ('), write(X), write(', '), write(Y), write(')'), nl
-        ;   Dificultad == 2 -> 
-            jugador_medio(Tablero, Jugador ,(X, Y)),
-            write('El jugador virtual elige: ('), write(X), write(', '), write(Y), write(')'), nl
-        ;   Dificultad == 3 -> 
-            jugador_virtual(Tablero, Jugador ,(X, Y)),
-            write('El jugador virtual elige: ('), write(X), write(', '), write(Y), write(')'), nl
-        ),
-        actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
-        imprimir_tablero(NuevoTablero),
-        oponente(Jugador, OtroJugador),
-        quedan_movimientos(NuevoTablero),
-        turno_juego_virtual(NuevoTablero, OtroJugador , Dificultad)
-    ;   write('No quedan movimientos disponibles.'), nl,
-        fin_juego(Tablero)
-    ).
-
-solicitar_movimiento(Tablero, X, Y) :-
-    repeat,
-    write('Introduce las coordenadas (X e Y como números entre 0 y 7): '), nl,
-    read_line_to_string(user_input, InputX),
-    number_string(X, InputX),
-    read_line_to_string(user_input, InputY),
-    number_string(Y, InputY),
-    (   
-        movimiento_valido(Tablero, X, Y) ->  % Valida si (X, Y) es un movimiento válido
-            !
         ;   
-            write(''), nl,
-            fail
+            Dificultad == 2 -> 
+            jugador_medio(Tablero, Jugador ,(X, Y)),
+        ;   
+            Dificultad == 3 -> 
+            jugador_virtual(Tablero, Jugador ,(X, Y)),
+        ),
+
+        actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
+        quedan_movimientos(NuevoTablero),
+        escribir_out(NuevoTablero),
+        jugar(Opcion, Dificultad, NuevoTablero),
     ;   
-        write('Movimiento inválido. Intenta de nuevo.'), nl,
-        fail
+        % Alerta('No quedan movimientos disponibles.'), nl,
+        fin_juego(Tablero)
     ).
 
 quedan_movimientos(Tablero) :-
@@ -104,21 +74,19 @@ quedan_movimientos(Tablero) :-
     member(empty, Fila).       
     
 fin_juego(Tablero):-
-    write('Fin del juego. Calculando puntuación...'), nl,
 
     contar_piezas(Tablero, black, PuntuacionBlack),
     contar_piezas(Tablero, white, PuntuacionWhite),
-    write('Puntuación final:'), nl,
-    write('Black: '), write(PuntuacionBlack), nl,
-    write('White: '), write(PuntuacionWhite), nl,
+
+    escribir_out(Tablero),
     (   
         PuntuacionBlack > PuntuacionWhite ->
-        write('¡Black gana!')
+        escribir_end(1, PuntuacionBlack)
     ;   
         PuntuacionWhite > PuntuacionBlack ->
-        write('¡White gana!')
+        escribir_end(2, PuntuacionWhite)
     ;   
-        write('¡Es un empate!')
+        escribir_end(3, PuntuacionBlack)
     ).
 
 
