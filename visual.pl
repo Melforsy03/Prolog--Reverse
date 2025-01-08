@@ -32,9 +32,10 @@ leer_in(Jugador, X, Y) :-
     write(StreamOut, '0'),                    
     close(StreamOut).            
 
-escribir_out(Matriz) :-
+escribir_out(Matriz, Error) :-
     open('out.txt', write, Stream),
     write(Stream, '1 '),  % Comienza con un 1 para indicar que es una respuesta válida
+    write(Stream, Error),
     escribir_matriz(Stream, Matriz),
     close(Stream).
 
@@ -47,13 +48,13 @@ escribir_matriz(Stream, [H|T]) :-
 convertir(H, X) :-
     ( 
         H == empty -> 
-        X is 0, 
+        X is 0
     ;   
         H == black -> 
-        X is 1,
+        X is 1
     ;   
         H == white -> 
-        X is 2,
+        X is 2
     ).
 
 escribir_end(Jugador, Puntuacion) :-
