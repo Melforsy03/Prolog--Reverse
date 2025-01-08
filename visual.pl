@@ -1,3 +1,4 @@
+:- ensure_loaded('tablero.pl').
 leer_start(Opcion, Dificultad):- 
     open('ireverse/start.txt', read, StreamIn),         
     read_line_to_string(StreamIn, Line),      
@@ -27,6 +28,7 @@ leer_in(Jugador, X, Y) :-
 escribir_out(Matriz, Error) :-
     write('transformar la matriz'), nl,
     transformar_tablero(Matriz, Matriz_Out),
+    imprimir_tablero(Matriz_Out),
     open('ireverse/out.txt', write, Stream),
     write(Stream, '1 '),  % Comienza con un 1 para indicar que es una respuesta válida
     write(Stream, Error),
@@ -35,7 +37,6 @@ escribir_out(Matriz, Error) :-
 
 escribir_matriz(_, []) :- nl.  % Cuando se haya procesado toda la matriz, termina con un salto de línea.
 escribir_matriz(Stream, [H|T]) :-
-    convertir(H, X),
     write(Stream, X),
     escribir_matriz(Stream, T).
 
@@ -74,15 +75,5 @@ poner_ceroS() :-
 
 poner_ceroI() :-
     open('ireverse/in.txt', write, StreamOut),       
-    write(StreamOut, '0'),                    
-    close(StreamOut).
-
-poner_ceroO() :-
-    open('ireverse/out.txt', write, StreamOut),       
-    write(StreamOut, '0'),                    
-    close(StreamOut).
-
-poner_ceroE() :-
-    open('ireverse/end.txt', write, StreamOut),       
     write(StreamOut, '0'),                    
     close(StreamOut).

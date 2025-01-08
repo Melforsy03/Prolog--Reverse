@@ -59,8 +59,6 @@ turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad) :-
         ->  
             write('Se va a escribir un out'), nl,
             escribir_out(NuevoTablero, 0),
-            write('Se va a escribir un cero'), nl,
-            poner_ceroO(),
             jugar(Opcion, Dificultad, NuevoTablero)
         ;   
             fin_juego(NuevoTablero)
@@ -90,9 +88,6 @@ turno_juego_virtual(Tablero, Jugador , Opcion, Dificultad) :-
         quedan_movimientos(NuevoTablero),
         write('Se va a escribir en out'), nl,
         escribir_out(NuevoTablero, 0),
-        write('Se va a escribir un cero'), nl,
-        poner_ceroO(),
-        write('Se un cero'), nl,
         jugar(Opcion, Dificultad, NuevoTablero)
     ;   
         % Alerta('No quedan movimientos disponibles.'), nl,
@@ -105,7 +100,6 @@ quedan_movimientos(Tablero) :-
     member(empty, Fila).       
     
 fin_juego(Tablero):-
-
     contar_piezas(Tablero, black, PuntuacionBlack),
     contar_piezas(Tablero, white, PuntuacionWhite),
 
@@ -118,9 +112,7 @@ fin_juego(Tablero):-
         escribir_end(2, PuntuacionWhite)
     ;   
         escribir_end(3, PuntuacionBlack)
-    ),
-    poner_ceroO().
-
+    ).
 
 asignar_color(Jugador, Color) :-
     (Jugador =:= 1 -> Color = black; Color = white).
