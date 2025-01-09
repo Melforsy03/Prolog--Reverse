@@ -1,14 +1,25 @@
-[gd_scene load_steps=6 format=3 uid="uid://dqx2fuhfv5wkg"]
+[gd_scene load_steps=10 format=3 uid="uid://dqx2fuhfv5wkg"]
 
 [ext_resource type="Texture2D" uid="uid://cr1qv1apm1dns" path="res://images/blank.png" id="1_in1qe"]
 [ext_resource type="Texture2D" uid="uid://dk18rumpx78li" path="res://images/background.png" id="1_m12b3"]
+[ext_resource type="Texture2D" uid="uid://dgt5alibjm6q2" path="res://images/menu.png" id="2_2eydc"]
 [ext_resource type="Script" path="res://scenes/Board.cs" id="2_kvk04"]
+[ext_resource type="Texture2D" uid="uid://7tpxyutj3o11" path="res://images/start.png" id="3_16rsl"]
 [ext_resource type="Texture2D" uid="uid://bwyaia4w1546v" path="res://images/blue.png" id="4_u2154"]
 [ext_resource type="Texture2D" uid="uid://bghov6ep38ume" path="res://images/red.png" id="5_rkl5j"]
+[ext_resource type="Texture2D" uid="uid://bbpjfgivmf6gf" path="res://images/board.png" id="6_52d52"]
+
+[sub_resource type="FontFile" id="FontFile_0lqnp"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
 
 [node name="main" type="Node2D"]
 
 [node name="Background" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(743, 386)
 scale = Vector2(3.394, 1.8)
 texture = ExtResource("1_m12b3")
@@ -16,28 +27,34 @@ texture = ExtResource("1_m12b3")
 [node name="menu" type="Node2D" parent="."]
 position = Vector2(1.52588e-05, 1.90735e-06)
 
-[node name="StateText" type="TextEdit" parent="menu"]
-offset_left = 665.0
-offset_top = 86.0
-offset_right = 757.0
-offset_bottom = 119.0
-text = "Reverse
-
-"
-editable = false
+[node name="menuBackground" type="Sprite2D" parent="menu"]
+position = Vector2(682, 384.5)
+scale = Vector2(0.710417, 0.639167)
+texture = ExtResource("2_2eydc")
 
 [node name="startButton" type="Button" parent="menu"]
-offset_left = 573.0
-offset_top = 326.0
-offset_right = 835.0
-offset_bottom = 402.0
-text = "Start"
+offset_left = 462.0
+offset_top = 408.0
+offset_right = 908.0
+offset_bottom = 572.0
+icon = ExtResource("3_16rsl")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="DificultyButton" type="OptionButton" parent="menu"]
-offset_left = 734.0
-offset_top = 243.0
-offset_right = 825.0
-offset_bottom = 274.0
+offset_left = 762.0
+offset_top = 296.0
+offset_right = 912.0
+offset_bottom = 336.0
+theme_override_colors/font_disabled_color = Color(1, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+flat = true
 item_count = 3
 popup/item_0/text = "Facil"
 popup/item_1/text = "Normal"
@@ -45,36 +62,24 @@ popup/item_1/id = 1
 popup/item_2/text = "Dificil"
 popup/item_2/id = 2
 
-[node name="DificultyTextButton" type="TextEdit" parent="menu/DificultyButton"]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -45.0
-offset_right = 89.0
-offset_bottom = -12.0
-text = "Dificultad
-"
-editable = false
-
 [node name="GameModeButton" type="OptionButton" parent="menu"]
-offset_left = 572.0
-offset_top = 247.0
-offset_right = 663.0
-offset_bottom = 278.0
+offset_left = 458.0
+offset_top = 296.0
+offset_right = 598.0
+offset_bottom = 333.0
+theme_override_colors/font_disabled_color = Color(1, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(1, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 0.124572, 0.0864938, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = SubResource("FontFile_0lqnp")
+flat = true
 item_count = 2
 popup/item_0/text = "PvP"
 popup/item_1/text = "PvE"
 popup/item_1/id = 1
-
-[node name="GameModeTextButton" type="TextEdit" parent="menu/GameModeButton"]
-layout_mode = 0
-offset_left = 1.0
-offset_top = -41.0
-offset_right = 93.0
-offset_bottom = -8.0
-text = "Modo
-
-"
-editable = false
 
 [node name="board" type="Node2D" parent="."]
 visible = false
@@ -82,668 +87,657 @@ position = Vector2(200, 20)
 scale = Vector2(0.7, 0.7)
 script = ExtResource("2_kvk04")
 
+[node name="boradBackground" type="Sprite2D" parent="board"]
+position = Vector2(676.429, 538.214)
+scale = Vector2(1.03497, 0.976786)
+texture = ExtResource("6_52d52")
+
 [node name="b0" type="Button" parent="board"]
-offset_left = 200.0
-offset_top = 10.0
-offset_right = 325.0
-offset_bottom = 135.0
+offset_left = 375.0
+offset_top = 122.0
+offset_right = 485.0
+offset_bottom = 232.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b1" type="Button" parent="board"]
-offset_left = 325.0
-offset_top = 10.0
-offset_right = 450.0
-offset_bottom = 135.0
+offset_left = 492.0
+offset_top = 122.0
+offset_right = 602.0
+offset_bottom = 232.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b2" type="Button" parent="board"]
-offset_left = 450.0
-offset_top = 10.0
-offset_right = 575.0
-offset_bottom = 135.0
+offset_left = 607.0
+offset_top = 122.0
+offset_right = 717.0
+offset_bottom = 232.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b3" type="Button" parent="board"]
-offset_left = 575.0
-offset_top = 10.0
-offset_right = 700.0
-offset_bottom = 135.0
+offset_left = 725.0
+offset_top = 122.0
+offset_right = 835.0
+offset_bottom = 232.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b4" type="Button" parent="board"]
-offset_left = 700.0
-offset_top = 10.0
-offset_right = 825.0
-offset_bottom = 135.0
+offset_left = 848.0
+offset_top = 122.0
+offset_right = 958.0
+offset_bottom = 232.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b5" type="Button" parent="board"]
-offset_left = 825.0
-offset_top = 10.0
-offset_right = 950.0
-offset_bottom = 135.0
+offset_left = 963.0
+offset_top = 122.0
+offset_right = 1073.0
+offset_bottom = 232.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b6" type="Button" parent="board"]
-offset_left = 950.0
-offset_top = 10.0
-offset_right = 1075.0
-offset_bottom = 135.0
+offset_left = 1081.0
+offset_top = 122.0
+offset_right = 1191.0
+offset_bottom = 232.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b7" type="Button" parent="board"]
-offset_left = 1075.0
-offset_top = 10.0
-offset_right = 1200.0
-offset_bottom = 135.0
+offset_left = 1200.0
+offset_top = 122.0
+offset_right = 1310.0
+offset_bottom = 232.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b8" type="Button" parent="board"]
-offset_left = 200.0
-offset_top = 135.0
-offset_right = 325.0
-offset_bottom = 260.0
+offset_left = 375.0
+offset_top = 230.0
+offset_right = 485.0
+offset_bottom = 340.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b9" type="Button" parent="board"]
-offset_left = 325.0
-offset_top = 135.0
-offset_right = 450.0
-offset_bottom = 260.0
+offset_left = 492.0
+offset_top = 230.0
+offset_right = 602.0
+offset_bottom = 340.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b10" type="Button" parent="board"]
-offset_left = 450.0
-offset_top = 135.0
-offset_right = 575.0
-offset_bottom = 260.0
+offset_left = 607.0
+offset_top = 228.571
+offset_right = 717.0
+offset_bottom = 338.571
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b11" type="Button" parent="board"]
-offset_left = 575.0
-offset_top = 135.0
-offset_right = 700.0
-offset_bottom = 260.0
+offset_left = 725.0
+offset_top = 228.571
+offset_right = 835.0
+offset_bottom = 338.571
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b12" type="Button" parent="board"]
-offset_left = 700.0
-offset_top = 135.0
-offset_right = 825.0
-offset_bottom = 260.0
+offset_left = 848.0
+offset_top = 230.0
+offset_right = 958.0
+offset_bottom = 340.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b13" type="Button" parent="board"]
-offset_left = 825.0
-offset_top = 135.0
-offset_right = 950.0
-offset_bottom = 260.0
+offset_left = 963.0
+offset_top = 228.571
+offset_right = 1073.0
+offset_bottom = 338.571
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b14" type="Button" parent="board"]
-offset_left = 950.0
-offset_top = 135.0
-offset_right = 1075.0
-offset_bottom = 260.0
+offset_left = 1081.0
+offset_top = 228.571
+offset_right = 1191.0
+offset_bottom = 338.571
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b15" type="Button" parent="board"]
-offset_left = 1075.0
-offset_top = 135.0
-offset_right = 1200.0
-offset_bottom = 260.0
+offset_left = 1200.0
+offset_top = 228.571
+offset_right = 1310.0
+offset_bottom = 338.571
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b16" type="Button" parent="board"]
-offset_left = 200.0
-offset_top = 260.0
-offset_right = 325.0
-offset_bottom = 385.0
+offset_left = 375.0
+offset_top = 341.0
+offset_right = 485.0
+offset_bottom = 451.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b17" type="Button" parent="board"]
-offset_left = 325.0
-offset_top = 260.0
-offset_right = 450.0
-offset_bottom = 385.0
+offset_left = 492.0
+offset_top = 341.0
+offset_right = 602.0
+offset_bottom = 451.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b18" type="Button" parent="board"]
-offset_left = 450.0
-offset_top = 260.0
-offset_right = 575.0
-offset_bottom = 385.0
+offset_left = 607.0
+offset_top = 341.0
+offset_right = 717.0
+offset_bottom = 451.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b19" type="Button" parent="board"]
-offset_left = 575.0
-offset_top = 260.0
-offset_right = 700.0
-offset_bottom = 385.0
+offset_left = 725.0
+offset_top = 341.0
+offset_right = 835.0
+offset_bottom = 451.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b20" type="Button" parent="board"]
-offset_left = 700.0
-offset_top = 260.0
-offset_right = 825.0
-offset_bottom = 385.0
+offset_left = 848.0
+offset_top = 341.0
+offset_right = 958.0
+offset_bottom = 451.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b21" type="Button" parent="board"]
-offset_left = 825.0
-offset_top = 260.0
-offset_right = 950.0
-offset_bottom = 385.0
+offset_left = 963.0
+offset_top = 341.0
+offset_right = 1073.0
+offset_bottom = 451.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b22" type="Button" parent="board"]
-offset_left = 950.0
-offset_top = 260.0
-offset_right = 1075.0
-offset_bottom = 385.0
+offset_left = 1081.0
+offset_top = 341.0
+offset_right = 1191.0
+offset_bottom = 451.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b23" type="Button" parent="board"]
-offset_left = 1075.0
-offset_top = 260.0
-offset_right = 1200.0
-offset_bottom = 385.0
+offset_left = 1200.0
+offset_top = 341.0
+offset_right = 1310.0
+offset_bottom = 451.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b24" type="Button" parent="board"]
-offset_left = 200.0
-offset_top = 385.0
-offset_right = 325.0
-offset_bottom = 510.0
+offset_left = 375.0
+offset_top = 450.0
+offset_right = 485.0
+offset_bottom = 560.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b25" type="Button" parent="board"]
-offset_left = 325.0
-offset_top = 385.0
-offset_right = 450.0
-offset_bottom = 510.0
+offset_left = 492.0
+offset_top = 450.0
+offset_right = 602.0
+offset_bottom = 560.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b26" type="Button" parent="board"]
-offset_left = 450.0
-offset_top = 385.0
-offset_right = 575.0
-offset_bottom = 510.0
+offset_left = 607.0
+offset_top = 450.0
+offset_right = 717.0
+offset_bottom = 560.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b27" type="Button" parent="board"]
-offset_left = 575.0
-offset_top = 385.0
-offset_right = 700.0
-offset_bottom = 510.0
+offset_left = 725.0
+offset_top = 450.0
+offset_right = 835.0
+offset_bottom = 560.0
 action_mode = 0
 icon = ExtResource("4_u2154")
 flat = true
 expand_icon = true
 
 [node name="b28" type="Button" parent="board"]
-offset_left = 700.0
-offset_top = 385.0
-offset_right = 825.0
-offset_bottom = 510.0
+offset_left = 848.0
+offset_top = 450.0
+offset_right = 958.0
+offset_bottom = 560.0
 action_mode = 0
 icon = ExtResource("5_rkl5j")
 flat = true
 expand_icon = true
 
 [node name="b29" type="Button" parent="board"]
-offset_left = 825.0
-offset_top = 385.0
-offset_right = 950.0
-offset_bottom = 510.0
+offset_left = 963.0
+offset_top = 450.0
+offset_right = 1073.0
+offset_bottom = 560.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b30" type="Button" parent="board"]
-offset_left = 950.0
-offset_top = 385.0
-offset_right = 1075.0
-offset_bottom = 510.0
+offset_left = 1081.0
+offset_top = 450.0
+offset_right = 1191.0
+offset_bottom = 560.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b31" type="Button" parent="board"]
-offset_left = 1075.0
-offset_top = 385.0
-offset_right = 1200.0
-offset_bottom = 510.0
+offset_left = 1200.0
+offset_top = 450.0
+offset_right = 1310.0
+offset_bottom = 560.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b32" type="Button" parent="board"]
-offset_left = 200.0
-offset_top = 510.0
-offset_right = 325.0
-offset_bottom = 635.0
+offset_left = 375.0
+offset_top = 560.0
+offset_right = 485.0
+offset_bottom = 670.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b33" type="Button" parent="board"]
-offset_left = 325.0
-offset_top = 510.0
-offset_right = 450.0
-offset_bottom = 635.0
+offset_left = 492.0
+offset_top = 560.0
+offset_right = 602.0
+offset_bottom = 670.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b34" type="Button" parent="board"]
-offset_left = 450.0
-offset_top = 510.0
-offset_right = 575.0
-offset_bottom = 635.0
+offset_left = 607.0
+offset_top = 560.0
+offset_right = 717.0
+offset_bottom = 670.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b35" type="Button" parent="board"]
-offset_left = 575.0
-offset_top = 510.0
-offset_right = 700.0
-offset_bottom = 635.0
+offset_left = 725.0
+offset_top = 560.0
+offset_right = 835.0
+offset_bottom = 670.0
 action_mode = 0
 icon = ExtResource("5_rkl5j")
 flat = true
 expand_icon = true
 
 [node name="b36" type="Button" parent="board"]
-offset_left = 700.0
-offset_top = 510.0
-offset_right = 825.0
-offset_bottom = 635.0
+offset_left = 848.0
+offset_top = 560.0
+offset_right = 958.0
+offset_bottom = 670.0
 action_mode = 0
 icon = ExtResource("4_u2154")
 flat = true
 expand_icon = true
 
 [node name="b37" type="Button" parent="board"]
-offset_left = 825.0
-offset_top = 510.0
-offset_right = 950.0
-offset_bottom = 635.0
+offset_left = 963.0
+offset_top = 560.0
+offset_right = 1073.0
+offset_bottom = 670.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b38" type="Button" parent="board"]
-offset_left = 950.0
-offset_top = 510.0
-offset_right = 1075.0
-offset_bottom = 635.0
+offset_left = 1081.0
+offset_top = 560.0
+offset_right = 1191.0
+offset_bottom = 670.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b39" type="Button" parent="board"]
-offset_left = 1075.0
-offset_top = 510.0
-offset_right = 1200.0
-offset_bottom = 635.0
+offset_left = 1200.0
+offset_top = 560.0
+offset_right = 1310.0
+offset_bottom = 670.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b40" type="Button" parent="board"]
-offset_left = 200.0
-offset_top = 635.0
-offset_right = 325.0
-offset_bottom = 760.0
+offset_left = 375.0
+offset_top = 668.0
+offset_right = 485.0
+offset_bottom = 778.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b41" type="Button" parent="board"]
-offset_left = 325.0
-offset_top = 635.0
-offset_right = 450.0
-offset_bottom = 760.0
+offset_left = 492.0
+offset_top = 668.0
+offset_right = 602.0
+offset_bottom = 778.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b42" type="Button" parent="board"]
-offset_left = 450.0
-offset_top = 635.0
-offset_right = 575.0
-offset_bottom = 760.0
+offset_left = 607.0
+offset_top = 668.0
+offset_right = 717.0
+offset_bottom = 778.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b43" type="Button" parent="board"]
-offset_left = 575.0
-offset_top = 635.0
-offset_right = 700.0
-offset_bottom = 760.0
+offset_left = 725.0
+offset_top = 668.0
+offset_right = 835.0
+offset_bottom = 778.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b44" type="Button" parent="board"]
-offset_left = 700.0
-offset_top = 635.0
-offset_right = 825.0
-offset_bottom = 760.0
+offset_left = 848.0
+offset_top = 668.0
+offset_right = 958.0
+offset_bottom = 778.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b45" type="Button" parent="board"]
-offset_left = 825.0
-offset_top = 635.0
-offset_right = 950.0
-offset_bottom = 760.0
+offset_left = 963.0
+offset_top = 668.0
+offset_right = 1073.0
+offset_bottom = 778.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b46" type="Button" parent="board"]
-offset_left = 950.0
-offset_top = 635.0
-offset_right = 1075.0
-offset_bottom = 760.0
+offset_left = 1081.0
+offset_top = 668.0
+offset_right = 1191.0
+offset_bottom = 778.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b47" type="Button" parent="board"]
-offset_left = 1075.0
-offset_top = 635.0
-offset_right = 1200.0
-offset_bottom = 760.0
+offset_left = 1200.0
+offset_top = 668.0
+offset_right = 1310.0
+offset_bottom = 778.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b48" type="Button" parent="board"]
-offset_left = 200.0
-offset_top = 760.0
-offset_right = 325.0
-offset_bottom = 885.0
+offset_left = 375.0
+offset_top = 781.0
+offset_right = 485.0
+offset_bottom = 891.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b49" type="Button" parent="board"]
-offset_left = 325.0
-offset_top = 760.0
-offset_right = 450.0
-offset_bottom = 885.0
+offset_left = 492.0
+offset_top = 781.0
+offset_right = 602.0
+offset_bottom = 891.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b50" type="Button" parent="board"]
-offset_left = 450.0
-offset_top = 760.0
-offset_right = 575.0
-offset_bottom = 885.0
+offset_left = 607.0
+offset_top = 781.0
+offset_right = 717.0
+offset_bottom = 891.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b51" type="Button" parent="board"]
-offset_left = 575.0
-offset_top = 760.0
-offset_right = 700.0
-offset_bottom = 885.0
+offset_left = 725.0
+offset_top = 781.0
+offset_right = 835.0
+offset_bottom = 891.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b52" type="Button" parent="board"]
-offset_left = 700.0
-offset_top = 760.0
-offset_right = 825.0
-offset_bottom = 885.0
+offset_left = 848.0
+offset_top = 781.0
+offset_right = 958.0
+offset_bottom = 891.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b53" type="Button" parent="board"]
-offset_left = 825.0
-offset_top = 760.0
-offset_right = 950.0
-offset_bottom = 885.0
+offset_left = 963.0
+offset_top = 781.0
+offset_right = 1073.0
+offset_bottom = 891.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b54" type="Button" parent="board"]
-offset_left = 950.0
-offset_top = 760.0
-offset_right = 1075.0
-offset_bottom = 885.0
+offset_left = 1081.0
+offset_top = 781.0
+offset_right = 1191.0
+offset_bottom = 891.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b55" type="Button" parent="board"]
-offset_left = 1075.0
-offset_top = 760.0
-offset_right = 1200.0
-offset_bottom = 885.0
+offset_left = 1200.0
+offset_top = 781.0
+offset_right = 1310.0
+offset_bottom = 891.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b56" type="Button" parent="board"]
-offset_left = 200.0
-offset_top = 885.0
-offset_right = 325.0
-offset_bottom = 1010.0
+offset_left = 375.0
+offset_top = 895.0
+offset_right = 485.0
+offset_bottom = 1005.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b57" type="Button" parent="board"]
-offset_left = 325.0
-offset_top = 885.0
-offset_right = 450.0
-offset_bottom = 1010.0
+offset_left = 492.0
+offset_top = 895.0
+offset_right = 602.0
+offset_bottom = 1005.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b58" type="Button" parent="board"]
-offset_left = 450.0
-offset_top = 885.0
-offset_right = 575.0
-offset_bottom = 1010.0
+offset_left = 607.0
+offset_top = 895.0
+offset_right = 717.0
+offset_bottom = 1005.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b59" type="Button" parent="board"]
-offset_left = 575.0
-offset_top = 885.0
-offset_right = 700.0
-offset_bottom = 1010.0
+offset_left = 725.0
+offset_top = 895.0
+offset_right = 835.0
+offset_bottom = 1005.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b60" type="Button" parent="board"]
-offset_left = 700.0
-offset_top = 885.0
-offset_right = 825.0
-offset_bottom = 1010.0
+offset_left = 848.0
+offset_top = 895.0
+offset_right = 958.0
+offset_bottom = 1005.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b61" type="Button" parent="board"]
-offset_left = 825.0
-offset_top = 885.0
-offset_right = 950.0
-offset_bottom = 1010.0
+offset_left = 963.0
+offset_top = 895.0
+offset_right = 1073.0
+offset_bottom = 1005.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b62" type="Button" parent="board"]
-offset_left = 950.0
-offset_top = 885.0
-offset_right = 1075.0
-offset_bottom = 1010.0
+offset_left = 1081.0
+offset_top = 895.0
+offset_right = 1191.0
+offset_bottom = 1005.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
 [node name="b63" type="Button" parent="board"]
-offset_left = 1075.0
-offset_top = 885.0
-offset_right = 1200.0
-offset_bottom = 1010.0
+offset_left = 1200.0
+offset_top = 895.0
+offset_right = 1310.0
+offset_bottom = 1005.0
 action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
-[node name="player1" type="TextEdit" parent="board"]
-offset_left = 40.0
-offset_top = 22.8571
-offset_right = 131.0
-offset_bottom = 77.8571
-theme_override_colors/background_color = Color(0.262745, 0, 0.890196, 1)
-text = "Player2"
-
-[node name="player2" type="TextEdit" parent="board"]
-offset_left = 48.5714
-offset_top = 930.0
-offset_right = 139.571
-offset_bottom = 985.0
-theme_override_colors/background_color = Color(0.560861, 0.0043116, 1.92523e-07, 1)
-text = "Player1"
-
 [node name="info" type="TextEdit" parent="board"]
 visible = false
-offset_left = 1263.0
-offset_top = 517.0
-offset_right = 1419.0
-offset_bottom = 567.0
+offset_left = 664.286
+offset_top = -4.28572
+offset_right = 983.286
+offset_bottom = 84.7143
 
 [node name="winScreen" type="Node2D" parent="."]
 visible = false

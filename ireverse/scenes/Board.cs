@@ -127,7 +127,7 @@ public partial class Board : Node2D
 					if (a == 1 && !first)
 					{
 						first = true;
-					} else if (a == 2 && !second && first)
+					} else if (!second && first)
 					{
 						second = true;
 						Winner = int.Parse(a.ToString());
@@ -198,15 +198,17 @@ public partial class Board : Node2D
 			GetNode<Node2D>("../winScreen").Show();
 		}
 		private int GetX(int x) {
-			while (x > 7) {
-				x += -8;
-			}
-			return x;
+			
+			return x / 8;
 		}
 
 		private int GetY(int y) {
-			return y / 8;
-		}
+        while (y > 7)
+        {
+            y+= -8;
+        }
+        return y;
+    }
 
 
 		private void _on_play_again_button_pressed()
