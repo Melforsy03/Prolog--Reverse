@@ -25,6 +25,7 @@ scale = Vector2(3.394, 1.8)
 texture = ExtResource("1_m12b3")
 
 [node name="menu" type="Node2D" parent="."]
+visible = false
 position = Vector2(1.52588e-05, 1.90735e-06)
 
 [node name="menuBackground" type="Sprite2D" parent="menu"]
@@ -82,7 +83,6 @@ popup/item_1/text = "PvE"
 popup/item_1/id = 1
 
 [node name="board" type="Node2D" parent="."]
-visible = false
 position = Vector2(200, 20)
 scale = Vector2(0.7, 0.7)
 script = ExtResource("2_kvk04")
