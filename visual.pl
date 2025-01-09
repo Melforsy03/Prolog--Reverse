@@ -30,15 +30,20 @@ escribir_out(Matriz, Error) :-
     transformar_tablero(Matriz, Matriz_Out),
     imprimir_tablero(Matriz_Out),
     open('ireverse/out.txt', write, Stream),
-    write(Stream, '1 '),  % Comienza con un 1 para indicar que es una respuesta válida
+    write(Stream, '1'),  % Comienza con un 1 para indicar que es una respuesta válida
     write(Stream, Error),
     escribir_matriz(Stream, Matriz_Out),
     close(Stream).
 
-escribir_matriz(_, []) :- nl.  % Cuando se haya procesado toda la matriz, termina con un salto de línea.
-escribir_matriz(Stream, [H|T]) :-
-    write(Stream, X),
-    escribir_matriz(Stream, T).
+escribir_matriz(_, []) :- !.  % Cuando no hay más filas, termina.
+escribir_matriz(Stream, [Fila|Resto]) :-
+    escribir_fila(Stream, Fila),  % Escribe la fila sin salto de línea.
+    escribir_matriz(Stream, Resto).  % Continúa con el resto de la matriz.
+
+escribir_fila(_, []) :- !.  % Cuando no hay más elementos en la fila, termina.
+escribir_fila(Stream, [H|T]) :-
+    write(Stream, H),  % Escribe el número sin espacio ni salto.
+    escribir_fila(Stream, T).
 
 % Predicado principal
 transformar_tablero(MatrizOriginal, MatrizTransformada) :-
