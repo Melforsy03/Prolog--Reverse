@@ -25,12 +25,18 @@ leer_in(Jugador, X, Y) :-
     number_string(X, X_txt),                  
     number_string(Y, Y_txt).            
 
-escribir_out(Matriz) :-
+escribir_out(Matriz, Error) :-
     write('transformar la matriz'), nl,
     transformar_tablero(Matriz, Matriz_Out),
     imprimir_tablero(Matriz_Out),
     open('ireverse/out.txt', write, Stream),
-    write(Stream, '1'),  % Comienza con un 1 para indicar que es una respuesta válida
+    (
+        Error == 0
+    ->
+        write(Stream, '1')
+    ;
+        write(Stream, '-1')
+    ),
     escribir_matriz(Stream, Matriz_Out),
     close(Stream).
 

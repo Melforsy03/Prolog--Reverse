@@ -58,14 +58,14 @@ turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad) :-
             imprimir_tablero(NuevoTablero), nl
         ->  
             write('Se va a escribir un out'), nl,
-            escribir_out(NuevoTablero),
+            escribir_out(NuevoTablero, 0),
             jugar(Opcion, Dificultad, NuevoTablero)
         ;   
             fin_juego(NuevoTablero)
         )
     ;   % OUT ERROR
         write('Error en el mov'), nl,
-        escribir_out(NuevoTablero),
+        escribir_out(NuevoTablero, 1),
         poner_ceroO()
     ).
 
@@ -87,7 +87,7 @@ turno_juego_virtual(Tablero, Jugador , Opcion, Dificultad) :-
         actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
         quedan_movimientos(NuevoTablero),
         write('Se va a escribir en out'), nl,
-        escribir_out(NuevoTablero),
+        escribir_out(NuevoTablero, 0),
         jugar(Opcion, Dificultad, NuevoTablero)
     ;   
         % Alerta('No quedan movimientos disponibles.'), nl,
@@ -103,7 +103,7 @@ fin_juego(Tablero):-
     contar_piezas(Tablero, black, PuntuacionBlack),
     contar_piezas(Tablero, white, PuntuacionWhite),
 
-    escribir_out(Tablero),
+    escribir_out(Tablero, 0),
     (   
         PuntuacionBlack > PuntuacionWhite ->
         escribir_end(1, PuntuacionBlack)
