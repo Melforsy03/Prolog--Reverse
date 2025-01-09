@@ -15,34 +15,44 @@ inicio :-
         poner_ceroS(),
         write('Se puso el cero'), nl,
         inicializar_tablero(Tablero),
+        write('imprimir_tablero'), nl,
         imprimir_tablero(Tablero), nl,
+        write('llamar a jugar'), nl,
         jugar(Opcion, Dificultad, Tablero)
     ;
         write(' No Se leyo start'), nl,
         sleep(1),
+        write('llamar a inicio'), nl, 
         inicio()
     ).
 
 jugar(Opcion, Dificultad, Tablero) :-
     (   
+        write('leer_in'), nl, 
         leer_in(JugadorIn, X, Y),
+        write('asignar_color, segun el jugador'), nl, 
         asignar_color(JugadorIn, Jugador),
+        write('poner_cero en IN'), nl, 
         poner_ceroI()
     ->  
         (   
-            write('Se leyo in y  se puso cero'), nl,
-            Opcion == 0
-        ->  turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad)
+            write('Se leyo in y se puso cero'), nl,
+            Opcion == 0 ->  
+            write('turno_juego al humano'), nl, 
+            turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad)
         ;   
-            Opcion == 1, Jugador == 1
-        ->  turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad)
+            Opcion == 1, Jugador == 1 ->  
+            write('turno_juego al humano'), nl, 
+            turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad)
         ;   
-            Opcion == 1, Jugador == 2
-        ->  turno_juego_virtual(Tablero, Jugador, Opcion, Dificultad)
+            Opcion == 1, Jugador == 2 ->  
+            write('turno_juego a la IA'), nl, 
+            turno_juego_virtual(Tablero, Jugador, Opcion, Dificultad)
         )
     ;   
         write('No Se leyo in'), nl, 
         sleep(1),
+        write('llamar a jugar'), nl,
         jugar(Opcion, Dificultad, Tablero)
     ).
 
@@ -54,18 +64,23 @@ turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad) :-
     ->  
         actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
         (   
+            write('ver si quedan mov'), nl, 
             quedan_movimientos(NuevoTablero),
+            write('imprimir_tablero, qedan mov'), nl,
             imprimir_tablero(NuevoTablero), nl
         ->  
             write('Se va a escribir un out'), nl,
             escribir_out(NuevoTablero, 0),
+            write('llamar a jugar'), nl,
             jugar(Opcion, Dificultad, NuevoTablero)
         ;   
+            write('fin_juego'), nl, 
             fin_juego(NuevoTablero)
         )
     ;   % OUT ERROR
         write('Error en el mov'), nl,
         escribir_out(Tablero, 1),
+        write('llamar a jugar'), nl,
         jugar(Opcion, Dificultad, Tablero)
     ).
 
@@ -75,16 +90,21 @@ turno_juego_virtual(Tablero, Jugador , Opcion, Dificultad) :-
     (  
         ( 
             Dificultad == 0 -> 
+            write('jugador_facil'), nl,
             jugador_facil(Tablero, Jugador , (X, Y))
         ;   
             Dificultad == 1 -> 
+            write('jugador_medio'), nl,
             jugador_medio(Tablero, Jugador ,(X, Y))
         ;   
             Dificultad == 2 -> 
+            write('jugador_virtual'), nl,
             jugador_virtual(Tablero, Jugador ,(X, Y))
         ),
 
+        write('actualiza_tablero'), nl,
         actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
+         write('ver si quedan_movimientos'), nl,
         quedan_movimientos(NuevoTablero),
         write('Se va a escribir en out'), nl,
         escribir_out(NuevoTablero, 0),
@@ -100,6 +120,7 @@ quedan_movimientos(Tablero) :-
     member(empty, Fila).       
     
 fin_juego(Tablero):-
+    write('contar_piezas'), nl,
     contar_piezas(Tablero, black, PuntuacionBlack),
     contar_piezas(Tablero, white, PuntuacionWhite),
 
