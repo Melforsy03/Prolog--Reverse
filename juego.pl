@@ -31,13 +31,13 @@ jugar(Opcion, Dificultad, Tablero) :-
     ->  
         (   
             write('Se leyo in y  se puso cero'), nl,
-            Opcion == 1
+            Opcion == 0
         ->  turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad)
         ;   
-            Opcion == 2, Jugador == 1
+            Opcion == 1, Jugador == 1
         ->  turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad)
         ;   
-            Opcion == 2, Jugador == 2
+            Opcion == 1, Jugador == 2
         ->  turno_juego_virtual(Tablero, Jugador, Opcion, Dificultad)
         )
     ;   
@@ -58,14 +58,14 @@ turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad) :-
             imprimir_tablero(NuevoTablero), nl
         ->  
             write('Se va a escribir un out'), nl,
-            escribir_out(NuevoTablero, 0),
+            escribir_out(NuevoTablero),
             jugar(Opcion, Dificultad, NuevoTablero)
         ;   
             fin_juego(NuevoTablero)
         )
     ;   % OUT ERROR
         write('Error en el mov'), nl,
-        escribir_out(NuevoTablero, 1),
+        escribir_out(NuevoTablero),
         poner_ceroO()
     ).
 
@@ -74,20 +74,20 @@ turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad) :-
 turno_juego_virtual(Tablero, Jugador , Opcion, Dificultad) :-
     (  
         ( 
-            Dificultad == 1 -> 
+            Dificultad == 0 -> 
             jugador_facil(Tablero, Jugador , (X, Y))
         ;   
-            Dificultad == 2 -> 
+            Dificultad == 1 -> 
             jugador_medio(Tablero, Jugador ,(X, Y))
         ;   
-            Dificultad == 3 -> 
+            Dificultad == 2 -> 
             jugador_virtual(Tablero, Jugador ,(X, Y))
         ),
 
         actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
         quedan_movimientos(NuevoTablero),
         write('Se va a escribir en out'), nl,
-        escribir_out(NuevoTablero, 0),
+        escribir_out(NuevoTablero),
         jugar(Opcion, Dificultad, NuevoTablero)
     ;   
         % Alerta('No quedan movimientos disponibles.'), nl,
@@ -103,7 +103,7 @@ fin_juego(Tablero):-
     contar_piezas(Tablero, black, PuntuacionBlack),
     contar_piezas(Tablero, white, PuntuacionWhite),
 
-    escribir_out(Tablero, 0),
+    escribir_out(Tablero),
     (   
         PuntuacionBlack > PuntuacionWhite ->
         escribir_end(1, PuntuacionBlack)
