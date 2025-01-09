@@ -35,7 +35,7 @@ escribir_out(Matriz, Error) :-
     ->
         write(Stream, '1')
     ;
-        write(Stream, '-1')
+        write(Stream, '2')
     ),
     escribir_matriz(Stream, Matriz_Out),
     close(Stream).
