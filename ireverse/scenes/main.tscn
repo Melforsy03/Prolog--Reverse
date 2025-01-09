@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqx2fuhfv5wkg"]
+[gd_scene load_steps=6 format=3 uid="uid://dqx2fuhfv5wkg"]
 
 [ext_resource type="Texture2D" uid="uid://cr1qv1apm1dns" path="res://images/blank.png" id="1_in1qe"]
 [ext_resource type="Texture2D" uid="uid://dk18rumpx78li" path="res://images/background.png" id="1_m12b3"]
 [ext_resource type="Script" path="res://scenes/Board.cs" id="2_kvk04"]
+[ext_resource type="Texture2D" uid="uid://bwyaia4w1546v" path="res://images/blue.png" id="4_u2154"]
+[ext_resource type="Texture2D" uid="uid://bghov6ep38ume" path="res://images/red.png" id="5_rkl5j"]
 
 [node name="main" type="Node2D"]
 
@@ -356,7 +358,7 @@ offset_top = 385.0
 offset_right = 700.0
 offset_bottom = 510.0
 action_mode = 0
-icon = ExtResource("1_in1qe")
+icon = ExtResource("4_u2154")
 flat = true
 expand_icon = true
 
@@ -366,7 +368,7 @@ offset_top = 385.0
 offset_right = 825.0
 offset_bottom = 510.0
 action_mode = 0
-icon = ExtResource("1_in1qe")
+icon = ExtResource("5_rkl5j")
 flat = true
 expand_icon = true
 
@@ -436,7 +438,7 @@ offset_top = 510.0
 offset_right = 700.0
 offset_bottom = 635.0
 action_mode = 0
-icon = ExtResource("1_in1qe")
+icon = ExtResource("5_rkl5j")
 flat = true
 expand_icon = true
 
@@ -446,7 +448,7 @@ offset_top = 510.0
 offset_right = 825.0
 offset_bottom = 635.0
 action_mode = 0
-icon = ExtResource("1_in1qe")
+icon = ExtResource("4_u2154")
 flat = true
 expand_icon = true
 
@@ -728,14 +730,6 @@ offset_bottom = 77.8571
 theme_override_colors/background_color = Color(0.262745, 0, 0.890196, 1)
 text = "Player2"
 
-[node name="playerTurn" type="TextEdit" parent="board"]
-offset_left = 1312.86
-offset_top = 465.714
-offset_right = 1437.86
-offset_bottom = 520.714
-theme_override_colors/background_color = Color(0.262745, 0, 0.890196, 1)
-text = "Player2 Turn"
-
 [node name="player2" type="TextEdit" parent="board"]
 offset_left = 48.5714
 offset_top = 930.0
@@ -743,6 +737,13 @@ offset_right = 139.571
 offset_bottom = 985.0
 theme_override_colors/background_color = Color(0.560861, 0.0043116, 1.92523e-07, 1)
 text = "Player1"
+
+[node name="info" type="TextEdit" parent="board"]
+visible = false
+offset_left = 1263.0
+offset_top = 517.0
+offset_right = 1419.0
+offset_bottom = 567.0
 
 [node name="winScreen" type="Node2D" parent="."]
 visible = false

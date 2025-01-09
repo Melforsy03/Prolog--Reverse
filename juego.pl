@@ -65,8 +65,7 @@ turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad) :-
         )
     ;   % OUT ERROR
         write('Error en el mov'), nl,
-        escribir_out(NuevoTablero, 1),
-        poner_ceroO()
+        escribir_out(NuevoTablero, 1)
     ).
 
 

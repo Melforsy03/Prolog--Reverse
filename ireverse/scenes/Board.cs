@@ -38,7 +38,7 @@ public partial class Board : Node2D
                 string line = srOut.ReadLine();
 				srOut.Close();
 				srOut = null;
-				GD.Print(line);
+				
 				string matrixLine = string.Empty;
 				bool firstReaded = false;
 
@@ -49,11 +49,24 @@ public partial class Board : Node2D
 						if (a == '1')
 						{
 							firstReaded = true;
-						}
+							GetNode<TextEdit>("../board/info").Hide();
+                            GD.Print(line);
+                        }
 						else if (a == '0')
 						{
 							break;
-						}
+						}else if(a == '2')
+						{
+                            GD.Print(line);
+                            GetNode<TextEdit>("../board/info").Text = "Opcion no valida";
+							GetNode<TextEdit>("../board/info").Show();
+                            swOut = new StreamWriter("../ireverse/out.txt");
+                            swOut.WriteLine("0");
+                            swOut.Close();
+                            swOut = null;
+                            AnswerReady = true;
+                            break;
+                        }
 					}
 					else if (firstReaded)
 					{
@@ -154,6 +167,7 @@ public partial class Board : Node2D
 			{
 				swIn = new StreamWriter("../ireverse/in.txt");
 				swIn.WriteLine("1" + PlayerTurn + GetX(i) + GetY(i));
+				GD.Print(GetX(i), GetY(i));
 				swIn.Close();
 				swIn = null;
 				AnswerReady = false;
@@ -171,13 +185,21 @@ public partial class Board : Node2D
 		{
 			started = false;
 			GetNode<Node2D>("../board").Hide();
-			GetNode<TextEdit>("../winScreen/winner").Text = "Player " + Winner + " has won!";
+			if(Winner != 3)
+			{
+				GetNode<TextEdit>("../winScreen/winner").Text = "Player " + Winner + " has won!";
+			}
+			else
+			{
+				GetNode<TextEdit>("../winScreen/winner").Text = "Draw";
+			}
+			
 			GetNode<TextEdit>("../winScreen/winner").Text = "Score: " + Score + ".";
 			GetNode<Node2D>("../winScreen").Show();
 		}
 		private int GetX(int x) {
 			while (x > 7) {
-				x = -8;
+				x += -8;
 			}
 			return x;
 		}
