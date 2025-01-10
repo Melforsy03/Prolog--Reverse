@@ -41,11 +41,11 @@ jugar(Opcion, Dificultad, Tablero) :-
             write('turno_juego al humano'), nl, 
             turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad)
         ;   
-            Opcion == 1, Jugador == 1 ->  
+            Opcion == 1, JugadorIn == 1 ->  
             write('turno_juego al humano'), nl, 
             turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad)
         ;   
-            Opcion == 1, Jugador == 2 ->  
+            Opcion == 1, JugadorIn == 2 ->  
             write('turno_juego a la IA'), nl, 
             turno_juego_virtual(Tablero, Jugador, Opcion, Dificultad)
         )
@@ -111,8 +111,8 @@ turno_juego_virtual(Tablero, Jugador , Opcion, Dificultad) :-
         jugar(Opcion, Dificultad, NuevoTablero)
     ;   
         % Alerta('No quedan movimientos disponibles.'), nl,
-        write('Se acabo el juego'), nl,
-        fin_juego(Tablero)
+        write('Hay algo q da falso'), nl,
+        
     ).
 
 quedan_movimientos(Tablero) :-

@@ -71,7 +71,7 @@ reemplazar_fila([white | Resto], [2 | RestoReemplazado]) :-
 
 
 escribir_end(Jugador, Puntuacion) :-
-    open('ireverse/end.txt', write, StreamIn),
+    open('ireverse/end.txt', write, Stream),
     write(Stream, '1'),  % Comienza con un 1 para indicar que es una respuesta válida
     write(Stream, Jugador),
     write(Stream, Puntuacion),

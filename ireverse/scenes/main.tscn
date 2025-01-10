@@ -743,25 +743,25 @@ offset_bottom = 84.7143
 visible = false
 
 [node name="winner" type="TextEdit" parent="winScreen"]
-offset_left = 584.0
-offset_top = 238.0
-offset_right = 673.0
-offset_bottom = 277.0
+offset_left = 548.0
+offset_top = 336.0
+offset_right = 773.0
+offset_bottom = 378.0
 text = "Ganador"
 
 [node name="score" type="TextEdit" parent="winScreen"]
-offset_left = 584.0
-offset_top = 287.0
-offset_right = 673.0
-offset_bottom = 326.0
+offset_left = 576.0
+offset_top = 437.0
+offset_right = 744.0
+offset_bottom = 489.0
 text = "Score"
 
 [node name="playAgainButton" type="Button" parent="winScreen"]
-offset_left = 584.0
-offset_top = 352.0
-offset_right = 677.0
-offset_bottom = 383.0
-text = "Pkay Again"
+offset_left = 581.0
+offset_top = 542.0
+offset_right = 728.0
+offset_bottom = 612.0
+text = "Play Again"
 
 [connection signal="pressed" from="menu/startButton" to="board" method="_on_start_button_pressed"]
 [connection signal="pressed" from="board/b0" to="board" method="_on_b_0_pressed"]
