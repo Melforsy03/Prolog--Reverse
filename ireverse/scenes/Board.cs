@@ -101,6 +101,33 @@ public partial class Board : Node2D
                             }
                             
                             break;
+                        }else if(a == '3')
+						{
+                            GD.Print(line);
+                            try
+                            {
+                                swOut = new StreamWriter("../ireverse/out.txt");
+                                swOut.WriteLine("0");
+                                swOut.Close();
+                                swOut = null;
+                                AnswerReady = true;
+                            }
+                            catch (Exception ex)
+                            {
+                            }
+							GetNode<TextEdit>("info").Text = "El jugador " + PlayerTurn + " pasa turno.";
+							GetNode<TextEdit>("info").Show();
+                            if (PlayerTurn == 1)
+                            {
+                                PlayerTurn = 2;
+                            }
+                            else
+                            {
+                                PlayerTurn = 1;
+                            }
+
+
+                            break;
                         }
 					}
 					else if (firstReaded)
@@ -147,9 +174,6 @@ public partial class Board : Node2D
                     swOut = null;
                     AnswerReady = true;     
 				}
-				
-
-               
 			}
             string end = string.Empty;
             try
