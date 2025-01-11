@@ -80,8 +80,8 @@ jugar(Opcion, Dificultad, Tablero, Pase) :-
 
 % Manejo de turnos
 turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad, Movimientos) :-
-    member((X, Y), Movimientos) ->
     ( 
+        member((X, Y), Movimientos) ->
         write('el mov es valido'), nl,
         write('actualizar tablero'), nl, 
         actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero), 
