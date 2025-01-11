@@ -60,10 +60,13 @@ jugar(Opcion, Dificultad, Tablero) :-
 % Manejo de turnos
 turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad) :-
     (   
-        movimiento_valido(Tablero, X, Y)
+        movimiento_valido(Tablero, X, Y),
+        write('el mov es valido'), nl,
+        write('actualizando tablero'), nl
     ->  
         actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
         (   
+            write('tablero actualizado'), nl,
             write('ver si quedan mov'), nl, 
             quedan_movimientos(NuevoTablero),
             write('imprimir_tablero, qedan mov'), nl,
@@ -74,11 +77,11 @@ turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad) :-
             write('llamar a jugar'), nl,
             jugar(Opcion, Dificultad, NuevoTablero)
         ;   
-            write('fin_juego'), nl, 
+            write('fin_juego, no quedan mov'), nl, 
             fin_juego(NuevoTablero)
         )
     ;   % OUT ERROR
-        write('Error en el mov'), nl,
+        write('Error, mov invalido'), nl,
         escribir_out(Tablero, 1),
         write('llamar a jugar'), nl,
         jugar(Opcion, Dificultad, Tablero)
@@ -91,28 +94,33 @@ turno_juego_virtual(Tablero, Jugador , Opcion, Dificultad) :-
         ( 
             Dificultad == 0 -> 
             write('jugador_facil'), nl,
-            jugador_facil(Tablero, Jugador , (X, Y))
+            jugador_facil(Tablero, Jugador , (X, Y)),
+            write('ya jugo la IA'), nl
+            
         ;   
             Dificultad == 1 -> 
             write('jugador_medio'), nl,
-            jugador_medio(Tablero, Jugador ,(X, Y))
+            jugador_medio(Tablero, Jugador ,(X, Y)),
+            write('ya jugo la IA'), nl
         ;   
             Dificultad == 2 -> 
-            write('jugador_virtual'), nl,
-            jugador_virtual(Tablero, Jugador ,(X, Y))
+            write('jugador_dificil'), nl,
+            jugador_virtual(Tablero, Jugador ,(X, Y)),
+            write(' ya jugo la IA'), nl
         ),
 
-        write('actualiza_tablero'), nl,
+        write('actualizar_tablero'), nl,
         actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
         write('ver si quedan_movimientos'), nl,
         quedan_movimientos(NuevoTablero),
-        write('Se va a escribir en out'), nl,
+        write('Se va a escribir en out, quedan mov'), nl,
         escribir_out(NuevoTablero, 0),
+        write('llamar a jugar'), nl,
         jugar(Opcion, Dificultad, NuevoTablero)
     ;   
         % Alerta('No quedan movimientos disponibles.'), nl,
-        write('Hay algo q da falso'), nl,
-        
+        write('fin_juego, no quedan mov, si no jugo la IA entonces dio falso'), nl, 
+        fin_juego(NuevoTablero)
     ).
 
 quedan_movimientos(Tablero) :-
