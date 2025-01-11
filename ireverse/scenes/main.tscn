@@ -87,17 +87,18 @@ position = Vector2(200, 20)
 scale = Vector2(0.7, 0.7)
 script = ExtResource("2_kvk04")
 
+[node name="boradBackground" type="Sprite2D" parent="board"]
+position = Vector2(676.429, 538.214)
+scale = Vector2(1.03497, 0.976786)
+texture = ExtResource("6_52d52")
+
 [node name="info" type="TextEdit" parent="board"]
 visible = false
 offset_left = 664.286
 offset_top = -4.28572
 offset_right = 983.286
 offset_bottom = 84.7143
-
-[node name="boradBackground" type="Sprite2D" parent="board"]
-position = Vector2(676.429, 538.214)
-scale = Vector2(1.03497, 0.976786)
-texture = ExtResource("6_52d52")
+editable = false
 
 [node name="b0" type="Button" parent="board"]
 offset_left = 375.0
