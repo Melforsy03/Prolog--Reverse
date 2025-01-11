@@ -38,8 +38,9 @@ jugar(Opcion, Dificultad, Tablero, Pase) :-
         ( 
             write('Se leyo in y se puso cero'), nl,
             write('Ver si quedan mov para el jugador'), nl,
-            movimientos_validos(Tablero, Jugador, Movimientos),
+            movimientos_validosH(Tablero, Jugador, Movimientos),
             Movimientos \= [],
+            write(Movimientos),
             write('quedan mov'), nl
         ->
             (   

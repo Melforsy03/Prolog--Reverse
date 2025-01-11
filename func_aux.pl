@@ -95,7 +95,7 @@ max_member([Valor1-Mov1, Valor2-Mov2 | Resto], Maximo) :-
     ).
 
 % Obtiene la lista de todos los movimientos válidos para un jugador
-movimientos_validos(Tablero, Jugador, Movimientos) :-
+movimientos_validosH(Tablero, Jugador, Movimientos) :-
     encontrar_movimientos(Tablero, Jugador, 0, Movimientos).
 
 % Recorre el tablero y encuentra todos los movimientos válidos
@@ -114,7 +114,8 @@ encontrar_movimientos(Tablero, Jugador, FilaActual, Movimientos) :-
 % Recorre una fila específica para encontrar movimientos válidos
 encontrar_en_fila([], _, _, _, _, []). % Caso base: fila vacía
 encontrar_en_fila([Celda|Resto], Tablero, Jugador, Fila, Columna, Movimientos) :-
-    (   es_movimiento_valido(Tablero, Jugador, (Fila, Columna)) ->
+    (   
+        es_movimiento_valido(Tablero, Jugador, (Fila, Columna)) ->
         Movimientos = [(Fila, Columna)|MovimientosResto]
     ; 
         Movimientos = MovimientosResto
