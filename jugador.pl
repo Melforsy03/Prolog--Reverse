@@ -34,10 +34,10 @@ simular_movimiento(Tablero, Movimiento, Jugador, NuevoTablero) :-
     realizar_movimiento(Tablero, Movimiento, Jugador, NuevoTablero).
 
 realizar_movimiento(Tablero, Movimiento, Jugador, NuevoTablero) :-
-    capturar_fichas(Tablero, Movimiento, Jugador, TableroIntermedio),
+    capturar_fichasV(Tablero, Movimiento, Jugador, TableroIntermedio),
     colocar_ficha(TableroIntermedio, Movimiento, Jugador, NuevoTablero).
 
-capturar_fichas(Tablero, (X, Y), Jugador, TableroIntermedio) :-
+capturar_fichasV(Tablero, (X, Y), Jugador, TableroIntermedio) :-
     direcciones(Direcciones),
     actualiza_en_direcciones(Tablero, Jugador, X, Y, Direcciones, TableroIntermedio).
 
