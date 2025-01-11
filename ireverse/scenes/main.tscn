@@ -82,7 +82,6 @@ popup/item_1/text = "PvE"
 popup/item_1/id = 1
 
 [node name="board" type="Node2D" parent="."]
-visible = false
 position = Vector2(200, 20)
 scale = Vector2(0.7, 0.7)
 script = ExtResource("2_kvk04")
