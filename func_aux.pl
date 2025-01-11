@@ -115,7 +115,7 @@ encontrar_movimientos(Tablero, Jugador, FilaActual, Movimientos) :-
 encontrar_en_fila([], _, _, _, _, []). % Caso base: fila vacía
 encontrar_en_fila([Celda|Resto], Tablero, Jugador, Fila, Columna, Movimientos) :-
     (   
-        es_movimiento_valido(Tablero, Jugador, (Fila, Columna)) ->
+        es_movimiento_valido(Tablero, Jugador, Fila, Columna) ->
         Movimientos = [(Fila, Columna)|MovimientosResto]
     ; 
         Movimientos = MovimientosResto
