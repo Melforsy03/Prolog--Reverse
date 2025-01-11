@@ -62,10 +62,10 @@ turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad) :-
     (   
         write('Ver si quedan mov para el jugador'), nl,
         movimientos_validos(Tablero, Jugador, Movimientos),
-        Movimientos \= [].
-        write('quedan mov'), nl,
+        Movimientos \= [],
+        write('quedan mov'), nl
     ->
-        member((X, Y), Movimientos).
+        member((X, Y), Movimientos)
         ->
         (  
             actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
