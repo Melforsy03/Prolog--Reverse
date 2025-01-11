@@ -87,6 +87,13 @@ position = Vector2(200, 20)
 scale = Vector2(0.7, 0.7)
 script = ExtResource("2_kvk04")
 
+[node name="info" type="TextEdit" parent="board"]
+visible = false
+offset_left = 664.286
+offset_top = -4.28572
+offset_right = 983.286
+offset_bottom = 84.7143
+
 [node name="boradBackground" type="Sprite2D" parent="board"]
 position = Vector2(676.429, 538.214)
 scale = Vector2(1.03497, 0.976786)
@@ -731,13 +738,6 @@ action_mode = 0
 icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
-
-[node name="info" type="TextEdit" parent="board"]
-visible = false
-offset_left = 664.286
-offset_top = -4.28572
-offset_right = 983.286
-offset_bottom = 84.7143
 
 [node name="winScreen" type="Node2D" parent="."]
 visible = false
