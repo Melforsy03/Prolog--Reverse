@@ -18,7 +18,7 @@ inicio :-
         write('imprimir_tablero'), nl,
         imprimir_tablero(Tablero), nl,
         write('llamar a jugar'), nl,
-        jugar(Opcion, Dificultad, Tablero)
+        jugar(Opcion, Dificultad, Tablero, 0)
     ;
         write(' No Se leyo start'), nl,
         sleep(1),
@@ -26,7 +26,7 @@ inicio :-
         inicio()
     ).
 
-jugar(Opcion, Dificultad, Tablero) :-
+jugar(Opcion, Dificultad, Tablero, Pase) :-
     (   
         write('leer_in'), nl, 
         leer_in(JugadorIn, X, Y),
@@ -35,76 +35,72 @@ jugar(Opcion, Dificultad, Tablero) :-
         write('poner_cero en IN'), nl, 
         poner_ceroI()
     ->  
-        (   
+        ( 
             write('Se leyo in y se puso cero'), nl,
-            Opcion == 0 ->  
-            write('turno_juego al humano'), nl, 
-            turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad)
-        ;   
-            Opcion == 1, JugadorIn == 1 ->  
-            write('turno_juego al humano'), nl, 
-            turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad)
-        ;   
-            Opcion == 1, JugadorIn == 2 ->  
-            write('turno_juego a la IA'), nl, 
-            turno_juego_virtual(Tablero, Jugador, Opcion, Dificultad)
+            write('Ver si quedan mov para el jugador'), nl,
+            movimientos_validos(Tablero, Jugador, Movimientos),
+            Movimientos \= [],
+            write('quedan mov'), nl
+        ->
+            (   
+                Opcion == 0 ->  
+                write('turno_juego al humano'), nl, 
+                turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad, Movimientos)
+            ;   
+                Opcion == 1, JugadorIn == 1 ->  
+                write('turno_juego al humano'), nl, 
+                turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad, Movimientos)
+            ;   
+                Opcion == 1, JugadorIn == 2 ->  
+                write('turno_juego a la IA'), nl, 
+                turno_juego_virtual(Tablero, Jugador, Opcion, Dificultad)
+            )
+        ;     
+            (
+                Pase == 0 ->
+                write('no quedan mov, pasa el turno'), nl,
+                write('Escribir en out'), nl,
+                escribir_out(NuevoTablero, 2),
+                jugar(Opcion, Dificultad, Tablero, 1)
+            ;
+                Pase == 1 ->
+                write('no quedan mov, se han paso los dos jugadores'), nl,
+                write('Fin del juego'), nl,
+                fin_juego(Tablero)
+            )  
         )
     ;   
         write('No Se leyo in'), nl, 
         sleep(1),
         write('llamar a jugar'), nl,
-        jugar(Opcion, Dificultad, Tablero)
+        jugar(Opcion, Dificultad, Tablero, 0)
     ).
 
 
 % Manejo de turnos
-turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad) :-
-    (   
-        write('Ver si quedan mov para el jugador'), nl,
-        movimientos_validos(Tablero, Jugador, Movimientos),
-        Movimientos \= [],
-        write('quedan mov'), nl
-    ->
-        member((X, Y), Movimientos)
-        ->
-        (  
-            actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
-            (   
-                write('ver si quedan mov'), nl, 
-                quedan_movimientos(NuevoTablero),
-                write('imprimir_tablero, qedan mov'), nl,
-                imprimir_tablero(NuevoTablero), nl
-            ->  
-                write('Se va a escribir un out'), nl,
-                escribir_out(NuevoTablero, 0),
-                write('llamar a jugar'), nl,
-                jugar(Opcion, Dificultad, NuevoTablero)
-            ;   
-                write('fin_juego'), nl, 
-                fin_juego(NuevoTablero)
-            )
-        ;
-            write('el mo no es valido'), nl,
-            escribir_out(NuevoTablero, 1),
-            jugar(Opcion, Dificultad, Tablero)
-        )
+turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad, Movimientos) :-
+    member((X, Y), Movimientos) ->
+    ( 
+        write('el mov es valido'), nl,
+        write('actualizar tablero'), nl, 
+        actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero), 
+        write('imprimir_tablero'), nl,
+        imprimir_tablero(NuevoTablero), nl,
+
+        write('Se va a escribir un out'), nl,
+        escribir_out(NuevoTablero, 0),
+        write('llamar a jugar'), nl,
+        jugar(Opcion, Dificultad, NuevoTablero, 0)
+       
     ;
-        % Alerta('No quedan movimientos disponibles.'), nl,
-        write('no quedan mov, pasa el turno'), nl,
-        write('Escribir en out'), nl,
-        escribir_out(NuevoTablero, 2),
-        jugar(Opcion, Dificultad, Tablero)
+        write('el mov no es valido'), nl,
+        escribir_out(NuevoTablero, 1),
+        jugar(Opcion, Dificultad, Tablero, 0)
     ).
-
-
+   
 % Manejo de turnos contra jugador virtual
 turno_juego_virtual(Tablero, Jugador , Opcion, Dificultad) :-
-    (   
-        write('Ver si quedan mov para el jugador'), nl,
-        movimientos_validos(Tablero, Jugador, Movimientos),
-        Movimientos \= [],
-        write('quedan mov'), nl
-    ->
+    (
         ( 
             Dificultad == 0 -> 
             write('jugador_facil'), nl,
@@ -124,13 +120,7 @@ turno_juego_virtual(Tablero, Jugador , Opcion, Dificultad) :-
         write('Escribir en out'), nl,
         escribir_out(NuevoTablero, 0),
         write('llamar a jugar'), nl,
-        jugar(Opcion, Dificultad, NuevoTablero)
-    ;   
-        % Alerta('No quedan movimientos disponibles.'), nl,
-        write('no quedan mov, pasa el turno'), nl,
-        write('Escribir en out'), nl,
-        escribir_out(NuevoTablero, 2),
-        jugar(Opcion, Dificultad, Tablero)
+        jugar(Opcion, Dificultad, NuevoTablero, 0)
     ).
   
 fin_juego(Tablero):-
