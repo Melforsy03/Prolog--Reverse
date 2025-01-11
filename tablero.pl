@@ -56,12 +56,14 @@ capturar_fichas(Tablero, Jugador, X, Y, DX, DY, NuevoTablero) :-
 
 
 actualiza_celda(Tablero, X, Y, Jugador, NuevoTablero) :-
+    write('actualizar celda'), nl,
     nth0(X, Tablero, Fila, _),
     reemplazar(Fila, Y, Jugador, NuevaFila),
     reemplazar(Tablero, X, NuevaFila, NuevoTablero).
 
-reemplazar([_|T], 0, Elem, [Elem|T]).
+reemplazar([_|T], 0, Elem, [Elem|T]):- write('remplazar primera celda'), nl.
 reemplazar([H|T], I, Elem, [H|R]) :-
+    write('remplazar celda'), nl,
     I > 0,
     I1 is I - 1,
     reemplazar(T, I1, Elem, R).
