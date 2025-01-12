@@ -80,6 +80,7 @@ turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad) :-
             write('fin_juego, no quedan mov'), nl, 
             fin_juego(NuevoTablero)
         )
+        
     ;   % OUT ERROR
         write('Error, mov invalido'), nl,
         escribir_out(Tablero, 1),
@@ -111,6 +112,7 @@ turno_juego_virtual(Tablero, Jugador , Opcion, Dificultad) :-
 
         write('actualizar_tablero'), nl,
         actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
+        imprimir_tablero(NuevoTablero),
         write('ver si quedan_movimientos'), nl,
         quedan_movimientos(NuevoTablero),
         write('Se va a escribir en out, quedan mov'), nl,
