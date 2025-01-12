@@ -91,30 +91,30 @@ turno_juego(Tablero, Jugador, X, Y, Opcion, Dificultad) :-
 
 % Manejo de turnos contra jugador virtual
 turno_juego_virtual(Tablero, Jugador , Opcion, Dificultad) :-
-    (  
-        ( 
-            Dificultad == 0 -> 
-            write('jugador_facil'), nl,
-            jugador_facil(Tablero, Jugador , (X, Y)),
-            write('ya jugo la IA'), nl
+    ( 
+        Dificultad == 0 -> 
+        write('jugador_facil'), nl,
+        jugador_facil(Tablero, Jugador , (X, Y)),
+        write('ya jugo la IA'), nl
             
-        ;   
-            Dificultad == 1 -> 
-            write('jugador_medio'), nl,
-            jugador_medio(Tablero, Jugador ,(X, Y)),
-            write('ya jugo la IA'), nl
-        ;   
-            Dificultad == 2 -> 
-            write('jugador_dificil'), nl,
-            jugador_virtual(Tablero, Jugador ,(X, Y)),
-            write(' ya jugo la IA'), nl
-        ),
+    ;   
+        Dificultad == 1 -> 
+        write('jugador_medio'), nl,
+        jugador_medio(Tablero, Jugador ,(X, Y)),
+        write('ya jugo la IA'), nl
+    ;   
+        Dificultad == 2 -> 
+        write('jugador_dificil'), nl,
+        jugador_virtual(Tablero, Jugador ,(X, Y)),
+        write(' ya jugo la IA'), nl
+    ),
 
-        write('actualizar_tablero'), nl,
-        actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
-        imprimir_tablero(NuevoTablero),
-        write('ver si quedan_movimientos'), nl,
-        quedan_movimientos(NuevoTablero),
+    write('actualizar_tablero'), nl,
+    actualiza_tablero(Tablero, Jugador, X, Y, NuevoTablero),
+    imprimir_tablero(NuevoTablero),
+    write('ver si quedan_movimientos'), nl,
+    (
+        quedan_movimientos(NuevoTablero)  ->
         write('Se va a escribir en out, quedan mov'), nl,
         escribir_out(NuevoTablero, 0),
         write('llamar a jugar'), nl,
