@@ -143,7 +143,8 @@ fin_juego(Tablero):-
         escribir_end(2, PuntuacionWhite)
     ;   
         escribir_end(3, PuntuacionBlack)
-    ).
+    ),
+    inicio().
 
 asignar_color(Jugador, Color) :-
     (Jugador =:= 1 -> Color = black; Color = white).
