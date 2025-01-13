@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dqx2fuhfv5wkg"]
+[gd_scene load_steps=11 format=3 uid="uid://dqx2fuhfv5wkg"]
 
 [ext_resource type="Texture2D" uid="uid://cr1qv1apm1dns" path="res://images/blank.png" id="1_in1qe"]
 [ext_resource type="Texture2D" uid="uid://dk18rumpx78li" path="res://images/background.png" id="1_m12b3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bwyaia4w1546v" path="res://images/blue.png" id="4_u2154"]
 [ext_resource type="Texture2D" uid="uid://bghov6ep38ume" path="res://images/red.png" id="5_rkl5j"]
 [ext_resource type="Texture2D" uid="uid://bbpjfgivmf6gf" path="res://images/board.png" id="6_52d52"]
+[ext_resource type="Texture2D" uid="uid://oc2kvkx1dkxg" path="res://images/winscreen.png" id="9_16e7w"]
 
 [sub_resource type="FontFile" id="FontFile_0lqnp"]
 cache/0/16/0/ascent = 0.0
@@ -743,25 +744,30 @@ expand_icon = true
 [node name="winScreen" type="Node2D" parent="."]
 visible = false
 
-[node name="winner" type="TextEdit" parent="winScreen"]
-offset_left = 548.0
-offset_top = 336.0
-offset_right = 773.0
-offset_bottom = 378.0
+[node name="winbackground" type="Sprite2D" parent="winScreen"]
+position = Vector2(681, 427)
+scale = Vector2(0.219531, 0.237083)
+texture = ExtResource("9_16e7w")
+
+[node name="winner" type="TextEdit" parent="winScreen/winbackground"]
+offset_left = -511.317
+offset_top = -408.085
+offset_right = -287.317
+offset_bottom = -369.085
 text = "Ganador"
 
-[node name="score" type="TextEdit" parent="winScreen"]
-offset_left = 576.0
-offset_top = 437.0
-offset_right = 744.0
-offset_bottom = 489.0
+[node name="score" type="TextEdit" parent="winScreen/winbackground"]
+offset_left = -511.317
+offset_top = -129.702
+offset_right = -286.317
+offset_bottom = -90.7017
 text = "Score"
 
-[node name="playAgainButton" type="Button" parent="winScreen"]
-offset_left = 581.0
-offset_top = 542.0
-offset_right = 728.0
-offset_bottom = 612.0
+[node name="playAgainButton" type="Button" parent="winScreen/winbackground"]
+offset_left = -511.317
+offset_top = 161.335
+offset_right = -287.317
+offset_bottom = 200.335
 text = "Play Again"
 
 [connection signal="pressed" from="menu/startButton" to="board" method="_on_start_button_pressed"]
@@ -829,4 +835,4 @@ text = "Play Again"
 [connection signal="pressed" from="board/b61" to="board" method="_on_b_61_pressed"]
 [connection signal="pressed" from="board/b62" to="board" method="_on_b_62_pressed"]
 [connection signal="pressed" from="board/b63" to="board" method="_on_b_63_pressed"]
-[connection signal="pressed" from="winScreen/playAgainButton" to="board" method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="winScreen/winbackground/playAgainButton" to="board" method="_on_play_again_button_pressed"]

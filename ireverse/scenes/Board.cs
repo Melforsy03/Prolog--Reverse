@@ -120,10 +120,20 @@ public partial class Board : Node2D
                             if (PlayerTurn == 1)
                             {
                                 PlayerTurn = 2;
+                                Image image = new Image();
+                                ImageTexture Photo = new ImageTexture();
+                                image.Load(@"../ireverse/images/board2.png");
+                                Photo = ImageTexture.CreateFromImage(image);
+								GetNode<Sprite2D>("boradBackground").Texture = Photo;
                             }
                             else
                             {
                                 PlayerTurn = 1;
+                                Image image = new Image();
+                                ImageTexture Photo = new ImageTexture();
+                                image.Load(@"../ireverse/images/board.png");
+                                Photo = ImageTexture.CreateFromImage(image);
+                                GetNode<Sprite2D>("boradBackground").Texture = Photo;
                             }
 
 
@@ -162,11 +172,21 @@ public partial class Board : Node2D
 					
 					if (PlayerTurn == 1)
 					{
-						PlayerTurn = 2;
+                        Image image = new Image();
+                        ImageTexture Photo = new ImageTexture();
+                        image.Load(@"../ireverse/images/board2.png");
+                        Photo = ImageTexture.CreateFromImage(image);
+                        GetNode<Sprite2D>("boradBackground").Texture = Photo;
+                        PlayerTurn = 2;
 					}
 					else
 					{
-						PlayerTurn = 1;
+                        Image image = new Image();
+                        ImageTexture Photo = new ImageTexture();
+                        image.Load(@"../ireverse/images/board.png");
+                        Photo = ImageTexture.CreateFromImage(image);
+                        GetNode<Sprite2D>("boradBackground").Texture = Photo;
+                        PlayerTurn = 1;
 					}
                     swOut = new StreamWriter("../ireverse/out.txt");
                     swOut.WriteLine("0");
