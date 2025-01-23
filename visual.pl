@@ -38,16 +38,26 @@ escribir_out(Matriz, Error) :-
     write('transformar la matriz'), nl,
     transformar_tablero(Matriz, Matriz_Out),
     imprimir_tablero(Matriz_Out),
-    open('ireverse/out.txt', write, Stream),
-    (
-        Error == 0
-    ->
-        write(Stream, '1')
-    ;
-        write(Stream, '2')
-    ),
-    escribir_matriz(Stream, Matriz_Out),
-    close(Stream).
+
+    (   catch(open('ireverse/out.txt', write, Stream), 
+               E, 
+               (   
+                    write('Error al abrir el archivo: '), 
+                    write(E), nl, 
+                    fail
+                ))  
+    ->  % Si la apertura fue exitosa
+        (   Error == 0
+        ->  write(Stream, '1')
+        ;   
+            write(Stream, '2')
+        ),
+        escribir_matriz(Stream, Matriz_Out),
+        close(Stream)
+    ;   % Si no se pudo abrir el archivo
+        write('No se pudo abrir el archivo.'), nl
+    ).
+
 
 escribir_matriz(_, []) :- !.  % Cuando no hay más filas, termina.
 escribir_matriz(Stream, [Fila|Resto]) :-
