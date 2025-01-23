@@ -1,4 +1,6 @@
 :- ensure_loaded('tablero.pl').
+:- ensure_loaded('juego.pl').
+
 leer_start(Opcion, Dificultad):- 
     open('ireverse/start.txt', read, StreamIn),         
     read_line_to_string(StreamIn, Line),      
@@ -16,14 +18,21 @@ leer_in(Jugador, X, Y) :-
     read_line_to_string(StreamIn, Line),      
     close(StreamIn),     
 
-    sub_string(Line, 0, 1, _, "1"),   
-    sub_string(Line, 1, 1, _, Jugador_txt),
-    sub_string(Line, 2, 1, _, X_txt),         
-    sub_string(Line, 3, 1, _, Y_txt),  
+    (
+        sub_string(Line, 0, 1, _, "1")
+    ->
+        sub_string(Line, 1, 1, _, Jugador_txt),
+        sub_string(Line, 2, 1, _, X_txt),         
+        sub_string(Line, 3, 1, _, Y_txt),  
     
-    number_string(Jugador, Jugador_txt),  
-    number_string(X, X_txt),                  
-    number_string(Y, Y_txt).            
+        number_string(Jugador, Jugador_txt),  
+        number_string(X, X_txt),                  
+        number_string(Y, Y_txt)
+    ;
+        sub_string(Line, 0, 1, _, "2")
+    ->
+        inicio()
+    ).            
 
 escribir_out(Matriz, Error) :-
     write('transformar la matriz'), nl,
