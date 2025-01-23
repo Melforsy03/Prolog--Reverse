@@ -11,6 +11,8 @@ public partial class Board : Node2D
 	private static int GameMode = 0;
 	private static int Winner = 0;
 	private static int Score = 0;
+	private static bool AIPlayed = false;
+
 	
 	private static StreamWriter swStart;
 
@@ -40,16 +42,13 @@ public partial class Board : Node2D
                     swIn.Close();
                     swIn = null;
                     AnswerReady = false;
+					AIPlayed = true;
                 }
                 catch (Exception ex)
                 {
-                }
-
-                
+                }   
             }
-			{
 
-			}
 			if (!AnswerReady)
 			{
 				string line = string.Empty;
@@ -86,6 +85,7 @@ public partial class Board : Node2D
 						}else if(a == '2')
 						{
                             GetNode<TextEdit>("../board/info").Text = "Opcion no valida";
+							GetNode<AudioStreamPlayer2D>("../board/wrongSound").Play();
                             GetNode<TextEdit>("../board/info").Show();
                             GD.Print(line);
                             try
@@ -148,6 +148,11 @@ public partial class Board : Node2D
 				if (firstReaded)
 				{
 					int c = 0;
+					if(AIPlayed)
+					{
+						GetNode<AudioStreamPlayer2D>("../board/tileSound").Play();
+						AIPlayed = false;
+					}
 					foreach (char a in matrixLine)
 					{
 
@@ -258,7 +263,7 @@ public partial class Board : Node2D
 		
     }
 		public void ButtonManager(int i)
-		{
+		{	
 			if (AnswerReady) 
 			{
 				bool worked = true;
@@ -279,11 +284,17 @@ public partial class Board : Node2D
 				{
 					ButtonManager(i);
 				}
-            
+				
+				GetNode<AudioStreamPlayer2D>("../board/tileSound").Play();
+				
+				
+
 			}
 		}
+		
 		private void StartGame()
 		{
+			GetNode<AudioStreamPlayer2D>("../buttonSound").Play();
 			swStart = new StreamWriter("../ireverse/start.txt");
 			swStart.WriteLine("1" + GameMode + Difficulty);
 			swStart.Close();
@@ -293,17 +304,26 @@ public partial class Board : Node2D
 		private void EndGame()
 		{
 			started = false;
-			GetNode<Node2D>("../board").Hide();
 			if(Winner != 3)
 			{
-				GetNode<TextEdit>("../winScreen/winner").Text = "Player " + Winner + " has won!";
+				GetNode<TextEdit>("../winScreen/winbackground/winner").Text = "Player " + Winner + " has won!";
+				if(Winner == 1)
+				{
+					GetNode<AudioStreamPlayer2D>("../winScreen/winSound").Play();
+				}
+				else
+				{
+					GetNode<AudioStreamPlayer2D>("../winScreen/defeatSound").Play();
+				}
 			}
 			else
 			{
 				GetNode<TextEdit>("../winScreen/winner").Text = "Draw";
+				GetNode<AudioStreamPlayer2D>("../winScreen/drawSound").Play();
+
 			}
 			
-			GetNode<TextEdit>("../winScreen/score").Text = "Score: " + Score + ".";
+			GetNode<TextEdit>("../winScreen/winbackground/score").Text = "Score: " + Score + ".";
 			GetNode<Node2D>("../winScreen").Show();
 		}
 		private int GetX(int x) {
@@ -312,16 +332,23 @@ public partial class Board : Node2D
 		}
 
 		private int GetY(int y) {
-        while (y > 7)
-        {
-            y+= -8;
-        }
-        return y;
-    }
-
-
-		private void _on_play_again_button_pressed()
+			while (y > 7)
+			{
+				y+= -8;
+			}
+			return y;
+		}
+		
+		private void _on_back_button_pressed()
 		{
+      
+			EndGame();
+		}
+
+        private void _on_play_again_button_pressed()
+		{
+			GetNode<AudioStreamPlayer2D>("../buttonSound").Play();
+			started = false;
 			Winner = 0;
 			Score = 0;
 			PlayerTurn = 1;
@@ -353,13 +380,14 @@ public partial class Board : Node2D
 				}
 				
 			}
+			GetNode<Node2D>("../board").Hide();
 			GetNode<Node2D>("../winScreen").Hide();
 			GetNode<Node2D>("../menu").Show();
 		}
 
 		private void _on_start_button_pressed()
 		{
-
+			GetNode<AudioStreamPlayer2D>("../buttonSound").Play();
 			GameMode = GetNode<OptionButton>("../menu/GameModeButton").Selected;
 			if (GameMode == 0)
 			{

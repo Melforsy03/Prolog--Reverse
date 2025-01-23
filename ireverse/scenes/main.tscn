@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dqx2fuhfv5wkg"]
+[gd_scene load_steps=18 format=3 uid="uid://dqx2fuhfv5wkg"]
 
 [ext_resource type="Texture2D" uid="uid://cr1qv1apm1dns" path="res://images/blank.png" id="1_in1qe"]
 [ext_resource type="Texture2D" uid="uid://dk18rumpx78li" path="res://images/background.png" id="1_m12b3"]
@@ -9,6 +9,13 @@
 [ext_resource type="Texture2D" uid="uid://bghov6ep38ume" path="res://images/red.png" id="5_rkl5j"]
 [ext_resource type="Texture2D" uid="uid://bbpjfgivmf6gf" path="res://images/board.png" id="6_52d52"]
 [ext_resource type="Texture2D" uid="uid://oc2kvkx1dkxg" path="res://images/winscreen.png" id="9_16e7w"]
+[ext_resource type="AudioStream" uid="uid://y1llbkuayxeo" path="res://sounds/tile.mp3" id="9_jfduf"]
+[ext_resource type="AudioStream" uid="uid://cknkejdkwpnyj" path="res://sounds/win.mp3" id="10_nigmi"]
+[ext_resource type="Texture2D" uid="uid://c4nyd5q6wdylg" path="res://images/backbutton.png" id="11_fpeeq"]
+[ext_resource type="AudioStream" uid="uid://b4umimpodq3e" path="res://sounds/defeat.mp3" id="11_ll7ui"]
+[ext_resource type="AudioStream" uid="uid://crreokaxcj66j" path="res://sounds/draw.mp3" id="12_2xign"]
+[ext_resource type="AudioStream" uid="uid://bswvfkjtuy48c" path="res://sounds/loop2.mp3" id="13_lt3ml"]
+[ext_resource type="AudioStream" uid="uid://8bkbb4a5aot7" path="res://sounds/button.mp3" id="15_c753e"]
 
 [sub_resource type="FontFile" id="FontFile_0lqnp"]
 cache/0/16/0/ascent = 0.0
@@ -741,6 +748,23 @@ icon = ExtResource("1_in1qe")
 flat = true
 expand_icon = true
 
+[node name="tileSound" type="AudioStreamPlayer2D" parent="board"]
+stream = ExtResource("9_jfduf")
+
+[node name="wrongSound" type="AudioStreamPlayer2D" parent="board"]
+stream = ExtResource("12_2xign")
+
+[node name="backButton" type="Button" parent="board"]
+light_mask = 3
+visibility_layer = 0
+offset_left = -277.0
+offset_top = -23.0
+offset_right = 63.0
+offset_bottom = 132.0
+icon = ExtResource("11_fpeeq")
+icon_alignment = 1
+expand_icon = true
+
 [node name="winScreen" type="Node2D" parent="."]
 visible = false
 
@@ -750,25 +774,45 @@ scale = Vector2(0.219531, 0.237083)
 texture = ExtResource("9_16e7w")
 
 [node name="winner" type="TextEdit" parent="winScreen/winbackground"]
-offset_left = -511.317
-offset_top = -408.085
-offset_right = -287.317
-offset_bottom = -369.085
+offset_left = -501.0
+offset_top = -401.0
+offset_right = 506.0
+offset_bottom = -253.0
+theme_override_font_sizes/font_size = 70
 text = "Ganador"
 
 [node name="score" type="TextEdit" parent="winScreen/winbackground"]
-offset_left = -511.317
-offset_top = -129.702
-offset_right = -286.317
-offset_bottom = -90.7017
+offset_left = -501.0
+offset_top = -118.0
+offset_right = 501.0
+offset_bottom = 30.0
+theme_override_font_sizes/font_size = 70
 text = "Score"
 
 [node name="playAgainButton" type="Button" parent="winScreen/winbackground"]
-offset_left = -511.317
-offset_top = 161.335
-offset_right = -287.317
-offset_bottom = 200.335
+offset_left = -501.0
+offset_top = 173.0
+offset_right = 501.0
+offset_bottom = 320.0
+theme_override_font_sizes/font_size = 70
 text = "Play Again"
+
+[node name="winSound" type="AudioStreamPlayer2D" parent="winScreen"]
+stream = ExtResource("10_nigmi")
+
+[node name="defeatSound" type="AudioStreamPlayer2D" parent="winScreen"]
+stream = ExtResource("11_ll7ui")
+
+[node name="drawSound" type="AudioStreamPlayer2D" parent="winScreen"]
+stream = ExtResource("12_2xign")
+
+[node name="loop" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_lt3ml")
+autoplay = true
+parameters/looping = true
+
+[node name="buttonSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_c753e")
 
 [connection signal="pressed" from="menu/startButton" to="board" method="_on_start_button_pressed"]
 [connection signal="pressed" from="board/b0" to="board" method="_on_b_0_pressed"]
@@ -835,4 +879,5 @@ text = "Play Again"
 [connection signal="pressed" from="board/b61" to="board" method="_on_b_61_pressed"]
 [connection signal="pressed" from="board/b62" to="board" method="_on_b_62_pressed"]
 [connection signal="pressed" from="board/b63" to="board" method="_on_b_63_pressed"]
+[connection signal="pressed" from="board/backButton" to="board" method="_on_back_button_pressed"]
 [connection signal="pressed" from="winScreen/winbackground/playAgainButton" to="board" method="_on_play_again_button_pressed"]
