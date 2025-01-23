@@ -30,7 +30,7 @@ leer_in(Jugador, X, Y) :-
         number_string(Y, Y_txt)
     ;
         sub_string(Line, 0, 1, _, "2")
-    -:
+    ->
         poner_ceroI(),
         inicio()
     ).            
