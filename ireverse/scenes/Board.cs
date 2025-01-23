@@ -341,8 +341,21 @@ public partial class Board : Node2D
 		
 		private void _on_back_button_pressed()
 		{
-      
-			EndGame();
+			try
+			{
+				swIn = new StreamWriter("../ireverse/in.txt");
+				swIn.WriteLine("2");
+
+				swIn.Close();
+				swIn = null;
+				EndGame();
+			}
+			catch
+			{
+				_on_back_button_pressed();
+			}
+			
+			
 		}
 
         private void _on_play_again_button_pressed()
