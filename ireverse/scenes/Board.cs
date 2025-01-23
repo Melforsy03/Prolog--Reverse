@@ -345,7 +345,6 @@ public partial class Board : Node2D
 			{
 				swIn = new StreamWriter("../ireverse/in.txt");
 				swIn.WriteLine("2");
-
 				swIn.Close();
 				swIn = null;
 				EndGame();
