@@ -5,8 +5,8 @@ Este proyecto se centra en implementar el juego Reverse utilizando Prolog, un le
 
 Integrantes :
 
-Olivia Ibañez Mustelier			     311
+Olivia Ibañez Mustelier			 ___C-311
 
-Melanie Forsythe Matos		       312
+Melanie Forsythe Matos	     ___C-312
 
-Orlando de la Torre Leal		     312
+Orlando de la Torre Leal		 ___C-312
